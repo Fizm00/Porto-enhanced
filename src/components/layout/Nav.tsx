@@ -11,11 +11,11 @@ export function Nav({ onMenuClick, theme = "paper", activeLink }: NavProps) {
   const isTransparent = theme === "transparent";
   const isInk = theme === "ink";
   const bgClass = isTransparent
-    ? "bg-transparent text-paper"
+    ? "bg-transparent text-ink"
     : isInk
     ? "bg-ink text-paper"
     : "bg-paper text-ink";
-  const textClass = isInk || isTransparent ? "text-paper" : "text-ink";
+  const textClass = isInk ? "text-paper" : "text-ink";
 
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     if (href.startsWith("#")) {
@@ -29,7 +29,7 @@ export function Nav({ onMenuClick, theme = "paper", activeLink }: NavProps) {
       className={`w-full h-[56px] px-5 md:px-10 flex items-center justify-between border-b border-transparent z-40 select-none ${bgClass}`}
       style={{
         backgroundColor: isTransparent ? "transparent" : isInk ? "#0E0E0E" : "#F2EFE8",
-        color: isInk || isTransparent ? "#F2EFE8" : "#0E0E0E",
+        color: isInk ? "#F2EFE8" : "#0E0E0E",
       }}
     >
       {/* Wordmark Left */}
