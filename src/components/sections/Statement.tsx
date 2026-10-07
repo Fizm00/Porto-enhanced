@@ -5,28 +5,21 @@ import { useReducedMotion } from "../../hooks/useReducedMotion.ts";
 
 export function Statement() {
   const sectionRef = useRef<HTMLElement>(null);
-  const textRef = useRef<HTMLHeadingElement>(null);
+  const unrevealedRef = useRef<HTMLSpanElement>(null);
   const reducedMotion = useReducedMotion();
-
-  // Words that animate from 0.25 to 1.0 on scroll
-  const dimmedWords = personalInfo.statement.dimmed.split(" ");
 
   useGSAP(
     () => {
-      if (reducedMotion) return;
+      if (reducedMotion || !unrevealedRef.current || !sectionRef.current) return;
 
-      const dimmedWordElements = sectionRef.current?.querySelectorAll(".dimmed-word");
-      if (!dimmedWordElements || dimmedWordElements.length === 0) return;
-
-      gsap.to(dimmedWordElements, {
+      gsap.to(unrevealedRef.current, {
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: "top 40%",
-          end: "bottom 30%",
-          scrub: 0.5,
+          start: "top 45%",
+          end: "bottom 35%",
+          scrub: true,
         },
         opacity: 1,
-        stagger: 0.05,
         ease: "none",
       });
     },
@@ -37,36 +30,28 @@ export function Statement() {
     <section
       ref={sectionRef}
       aria-label="Personal Statement"
-      className="relative w-full min-h-screen flex items-center bg-ink text-paper px-5 md:px-10 py-16 md:py-20 select-none overflow-hidden"
+      className="relative w-full min-h-screen flex flex-col justify-center bg-ink text-paper px-5 md:px-10 overflow-hidden select-none"
     >
-      <div className="w-full max-w-[1440px] mx-auto">
-        {/* Left-aligned within 10 columns (max-w-[83.333%] of 12 cols) */}
-        <h2
-          ref={textRef}
-          className="font-display font-extrabold uppercase leading-[0.92] text-[7.5vw] sm:text-[6.8vw] md:text-[6.1vw] lg:text-[6.2vw] tracking-normal text-left max-w-full lg:max-w-[88%]"
-        >
-          {/* First 60% words: Full Paper */}
-          <span className="text-paper">{personalInfo.statement.lead} </span>
-
-          {/* Exactly ONE keyword in Signal (#FF4A1C) */}
-          <span className="text-signal">{personalInfo.statement.keyword} </span>
-
-          {/* Remaining of initial 60%: Full Paper */}
-          <span className="text-paper">{personalInfo.statement.revealed} </span>
-
-          {/* Remaining 40% words: Paper at 25% opacity for scroll reveal */}
-          {dimmedWords.map((word, index) => (
+      {/* 12-column grid layout container (max-w: 1360px, gap: 24px) */}
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-6 w-full max-w-[1360px] mx-auto items-center">
+        {/* 10 columns left-aligned statement */}
+        <div className="col-span-1 md:col-span-10">
+          <h2 className="font-display font-extrabold uppercase text-[7.5vw] md:text-[6.8vw] leading-[0.94] tracking-normal [word-spacing:0.05em] text-left">
+            <span className="text-paper">{personalInfo.statement.lead}</span>{" "}
+            <span className="text-signal">{personalInfo.statement.keyword}</span>{" "}
+            <span className="text-paper">{personalInfo.statement.revealed}</span>{" "}
             <span
-              key={`dimmed-${index}`}
-              className={`dimmed-word inline-block ${
-                reducedMotion ? "opacity-100 text-paper" : "opacity-25 text-paper"
+              ref={unrevealedRef}
+              className={`transition-opacity duration-300 ${
+                reducedMotion
+                  ? "opacity-100 text-paper"
+                  : "text-paper/25"
               }`}
             >
-              {word}
-              {index < dimmedWords.length - 1 ? "\u00A0" : ""}
+              {personalInfo.statement.unrevealed}
             </span>
-          ))}
-        </h2>
+          </h2>
+        </div>
       </div>
     </section>
   );

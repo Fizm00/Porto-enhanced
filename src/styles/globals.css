@@ -70,3 +70,12 @@ body {
 .tabular-nums {
   font-variant-numeric: tabular-nums;
 }
+
+/* Giant display title sizing to bleed edge-to-edge across canvas */
+.giant-title {
+  font-size: clamp(64px, 17.8vw, 260px);
+  line-height: 0.85;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  font-weight: 900;
+}

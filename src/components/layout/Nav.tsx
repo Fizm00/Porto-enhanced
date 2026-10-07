@@ -6,22 +6,22 @@ export interface NavProps {
 
 export function Nav({ onMenuClick }: NavProps) {
   return (
-    <header className="w-full h-[56px] flex items-center justify-between px-5 md:px-10 bg-paper text-ink select-none relative z-30">
+    <header className="w-full h-[56px] px-5 md:px-10 flex items-center justify-between border-b border-transparent z-40 bg-paper select-none">
       {/* Wordmark Left */}
       <a
         href="/"
-        className="font-mono text-xs md:text-sm uppercase tracking-wider text-ink hover:text-signal transition-colors"
+        className="font-mono text-[14px] tracking-tight uppercase font-medium text-ink hover:text-signal transition-colors duration-150"
       >
         {siteConfig.name}
       </a>
 
-      {/* Centered Navigation Links (Desktop) */}
-      <nav aria-label="Main navigation" className="hidden md:flex items-center gap-8 font-mono text-sm text-ink">
+      {/* Centered Nav Links */}
+      <nav aria-label="Main navigation" className="hidden md:flex items-center gap-10 font-mono text-[14px]">
         {siteConfig.navLinks.map((link) => (
           <a
             key={link.label}
             href={link.href}
-            className="hover:text-signal transition-colors"
+            className="text-ink hover:text-signal transition-colors duration-150"
           >
             {link.label}
           </a>
@@ -33,7 +33,7 @@ export function Nav({ onMenuClick }: NavProps) {
         type="button"
         onClick={onMenuClick}
         aria-label="Open navigation menu"
-        className="font-mono text-xs md:text-sm text-ink hover:text-signal transition-colors cursor-pointer"
+        className="font-mono text-[14px] cursor-pointer text-ink hover:text-signal transition-colors duration-150 bg-transparent border-0 p-0"
       >
         Menu
       </button>
