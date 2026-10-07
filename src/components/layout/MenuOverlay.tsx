@@ -40,7 +40,7 @@ export const MenuOverlay: React.FC<MenuOverlayProps> = ({
     { label: "CONTACT", href: "#contact" },
   ];
 
-  const email = personalInfo.email || "hello@firzahimawan.com";
+  const email = personalInfo.email || "himawanfirza21@gmail.com";
 
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     if (href.startsWith("#")) {

@@ -31,7 +31,7 @@ export const Contact: React.FC<ContactProps> = ({
       ? "Copied to clipboard"
       : "Click to copy";
 
-  const email = personalInfo.email || "hello@firzahimawan.com";
+  const email = personalInfo.email || "himawanfirza21@gmail.com";
 
   const handleCopy = () => {
     if (typeof navigator !== "undefined" && navigator.clipboard) {
@@ -116,7 +116,7 @@ export const Contact: React.FC<ContactProps> = ({
                 color: isSignalState ? "#FF4A1C" : "#F2EFE8",
               }}
             >
-              <div>FIRZAHIMAWAN@</div>
+              <div>himawanfirza21@</div>
               <div className="break-all sm:break-normal">GMAIL.COM</div>
             </div>
 

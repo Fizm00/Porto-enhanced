@@ -31,7 +31,7 @@ export const personalInfo: PersonalInfo = {
   discipline: "Fullstack Engineering & Open Source",
   location: "Yogyakarta",
   timezone: "Asia/Jakarta",
-  email: "firzahimawan@gmail.com",
+  email: "himawanfirza21@gmail.com",
   availability: "Available March 2026",
   availableDate: "March 2026",
   positioning:
@@ -45,8 +45,7 @@ export const personalInfo: PersonalInfo = {
       "I CRAFT RESILIENT BACKENDS THAT NEVER CRUMBLE UNDER LOAD AND MAKE COMPLEX ARCHITECTURES LOOK EFFORTLESS.",
     unrevealed:
       "I CRAFT RESILIENT BACKENDS THAT NEVER CRUMBLE UNDER LOAD AND MAKE COMPLEX ARCHITECTURES LOOK EFFORTLESS.",
-    full:
-      "I BUILD SYSTEMS LIKE I TUNE HARDWARE: RELENTLESS ABOUT LATENCY, UNCOMPROMISING ON PRECISION. WHETHER SCALING RECOMMENDATION ENGINES IN NODE OR INSPECTING MONGOOSE QUERIES AT MIDNIGHT, I CRAFT RESILIENT BACKENDS THAT NEVER CRUMBLE UNDER LOAD AND MAKE COMPLEX ARCHITECTURES LOOK EFFORTLESS.",
+    full: "I BUILD SYSTEMS LIKE I TUNE HARDWARE: RELENTLESS ABOUT LATENCY, UNCOMPROMISING ON PRECISION. WHETHER SCALING RECOMMENDATION ENGINES IN NODE OR INSPECTING MONGOOSE QUERIES AT MIDNIGHT, I CRAFT RESILIENT BACKENDS THAT NEVER CRUMBLE UNDER LOAD AND MAKE COMPLEX ARCHITECTURES LOOK EFFORTLESS.",
   },
   bio: [
     "Software engineer and fullstack developer focused on low-latency web backends, intelligent recommendation systems, and developer productivity tooling.",
@@ -106,12 +105,7 @@ export interface BeyondContent {
 
 export const beyondContent: BeyondContent = {
   title: "Beyond the work",
-  hobbies: [
-    "GUNPLA",
-    "YOGYAKARTA WALKS",
-    "MANUAL POUR-OVER",
-    "IEM TUNING",
-  ],
+  hobbies: ["GUNPLA", "YOGYAKARTA WALKS", "MANUAL POUR-OVER", "IEM TUNING"],
   photos: [
     {
       id: "photo-1",
@@ -170,4 +164,3 @@ export const beyondContent: BeyondContent = {
     ],
   },
 };
-
