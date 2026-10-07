@@ -15,6 +15,13 @@ export interface StatementProps {
   headingTag?: "h1" | "h2";
 }
 
+interface StatementWord {
+  id: string;
+  text: string;
+  isKeyword?: boolean;
+  isInitial?: boolean;
+}
+
 export function Statement({ frame, headingTag = "h2" }: StatementProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const textRef = useRef<HTMLHeadingElement>(null);
@@ -32,20 +39,20 @@ export function Statement({ frame, headingTag = "h2" }: StatementProps) {
     return "dynamic";
   }, [frame]);
 
-  // Derive words array from personalInfo.statement
-  const leadWords = useMemo(
-    () => personalInfo.statement.lead.trim().split(/\s+/),
-    []
-  );
-  const keyword = personalInfo.statement.keyword;
-  const revealedWords = useMemo(
-    () => personalInfo.statement.revealed.trim().split(/\s+/),
-    []
-  );
-  const unrevealedWords = useMemo(
-    () => personalInfo.statement.unrevealed.trim().split(/\s+/),
-    []
-  );
+  // Derive all words in exact sequential order from personalInfo.statement
+  const allStatementWords = useMemo<StatementWord[]>(() => {
+    const leadWords = personalInfo.statement.lead.trim().split(/\s+/);
+    const keyword = personalInfo.statement.keyword;
+    const revealedWords = personalInfo.statement.revealed.trim().split(/\s+/);
+    const unrevealedWords = personalInfo.statement.unrevealed.trim().split(/\s+/);
+
+    return [
+      ...leadWords.map((w, i) => ({ id: `lead-${i}`, text: w, isInitial: true })),
+      { id: "kw", text: keyword, isKeyword: true, isInitial: true },
+      ...revealedWords.map((w, i) => ({ id: `rev-${i}`, text: w, isInitial: true })),
+      ...unrevealedWords.map((w, i) => ({ id: `unrev-${i}`, text: w, isInitial: false })),
+    ];
+  }, []);
 
   const isStaticProgress = resolvedFrame === "progress";
   const isStaticRevealed = resolvedFrame === "revealed" || reducedMotion;
@@ -58,24 +65,24 @@ export function Statement({ frame, headingTag = "h2" }: StatementProps) {
     return () => clearTimeout(timer);
   }, []);
 
-  // GSAP word-by-word dynamic scroll-reveal
+  // GSAP word-by-word dynamic scroll-reveal starting from the very first word
   useGSAP(
     () => {
       if (isStaticProgress || isStaticRevealed || !sectionRef.current) return;
 
       const words = sectionRef.current.querySelectorAll<HTMLSpanElement>(
-        ".statement-unrevealed-word"
+        ".statement-word"
       );
       if (!words || words.length === 0) return;
 
-      // Pin section and scrub words word-by-word from 25% opacity to 100% paper
+      // Pin section and scrub words word-by-word from beginning (0.2 opacity) to 100% paper
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
           pin: true,
           start: "top top",
-          end: "+=100%",
-          scrub: 0.5,
+          end: "+=120%",
+          scrub: 0.6,
           anticipatePin: 1,
           invalidateOnRefresh: true,
         },
@@ -83,10 +90,10 @@ export function Statement({ frame, headingTag = "h2" }: StatementProps) {
 
       tl.fromTo(
         words,
-        { opacity: 0.25 },
+        { opacity: 0.2 },
         {
           opacity: 1,
-          stagger: 0.08,
+          stagger: 0.06,
           ease: "none",
         }
       );
@@ -127,34 +134,25 @@ export function Statement({ frame, headingTag = "h2" }: StatementProps) {
               fontSize: "clamp(32px, min(6.5vw, 8.2vh), 88px)",
             }}
           >
-            {/* First 60% of words in paper color */}
-            {leadWords.map((word, idx) => (
-              <span key={`lead-${idx}`} className="text-paper">
-                {word}{" "}
-              </span>
-            ))}
+            {allStatementWords.map((wordObj, idx) => {
+              const defaultOpacity = isStaticRevealed
+                ? 1
+                : isStaticProgress
+                ? wordObj.isInitial
+                  ? 1
+                  : 0.2
+                : 0.2;
 
-            {/* Exactly one key word in Signal (#FF4A1C) */}
-            <span className="text-signal">{keyword}{" "}</span>
-
-            {/* Remaining part of the first 60% */}
-            {revealedWords.map((word, idx) => (
-              <span key={`rev-${idx}`} className="text-paper">
-                {word}{" "}
-              </span>
-            ))}
-
-            {/* Remaining 40% of words (illuminates word-by-word during scroll scrub) */}
-            {unrevealedWords.map((word, idx) => {
-              const defaultOpacity = isStaticRevealed ? 1 : 0.25;
               return (
                 <span
-                  key={`unrev-${idx}`}
-                  className="statement-unrevealed-word text-paper inline"
+                  key={wordObj.id}
+                  className={`statement-word inline ${
+                    wordObj.isKeyword ? "text-signal font-extrabold" : "text-paper"
+                  }`}
                   style={{ opacity: defaultOpacity }}
                 >
-                  {word}
-                  {idx < unrevealedWords.length - 1 ? " " : ""}
+                  {wordObj.text}
+                  {idx < allStatementWords.length - 1 ? " " : ""}
                 </span>
               );
             })}
