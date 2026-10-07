@@ -22,22 +22,22 @@ export interface SiteConfig {
 
 export const siteConfig: SiteConfig = {
   name: "Firza Himawan",
-  title: "Firza Himawan — Portfolio",
+  title: "Firza Himawan — Software Engineer",
   tagline: "A loud, fast, human portfolio.",
   description:
-    "A loud, fast, human portfolio. Giant condensed type, paper and ink bands, one signal color. Editorial and broadcast energy, never a SaaS template.",
+    "Software engineer specializing in high-performance web applications, scalable backend architectures, intelligent recommendation systems, and open-source developer tooling.",
   location: "Yogyakarta",
-  coordinates: "[PLACEHOLDER]", // e.g. -7.7956° S, 110.3695° E
+  coordinates: "-7.7956° S, 110.3695° E",
   year: 2026,
   navLinks: [
-    { label: "Work", href: "/work" },
-    { label: "About", href: "/#about" },
-    { label: "Contact", href: "/#contact" },
+    { label: "About", href: "#about" },
+    { label: "Work", href: "#work" },
+    { label: "Contact", href: "#contact" },
   ],
   socialLinks: {
-    github: "[PLACEHOLDER]",
-    twitter: "[PLACEHOLDER]",
-    linkedin: "[PLACEHOLDER]",
-    instagram: "[PLACEHOLDER]",
+    github: "https://github.com/Fizm00",
+    twitter: "https://erdamotor.id",
+    linkedin: "https://linkedin.com/in/firzahimawan",
+    instagram: "https://erdamotor.id",
   },
 };

@@ -1,5 +1,6 @@
 import { Nav } from "../layout/Nav.tsx";
 import { personalInfo } from "../../content/personal.ts";
+import { SylvaLivingWorldScene } from "../../shaders/sylva-living-world/SylvaLivingWorldScene.tsx";
 
 export interface HeroProps {
   onMenuClick?: () => void;
@@ -11,13 +12,24 @@ export function Hero({ onMenuClick }: HeroProps) {
 
   return (
     <section className="bg-paper text-ink relative flex flex-col justify-between min-h-screen w-full select-none overflow-hidden">
-      {/* TOP BAR (56px) */}
-      <Nav onMenuClick={onMenuClick} />
+      {/* THREEUI SYLVA LIVING WORLD 3D SCENE (Scene-only, Maple Autumn variant, paper white ground) */}
+      <div className="absolute inset-0 w-full h-full z-0 overflow-hidden pointer-events-auto">
+        <SylvaLivingWorldScene
+          variant="maple-autumn"
+          paperBg={true}
+          className="w-full h-full"
+        />
+      </div>
 
-      {/* HERO CENTER SECTION WITH INTERLEAVED SCULPTURAL OBJECT */}
-      <div className="relative flex-1 flex flex-col justify-center items-center px-5 md:px-10 overflow-hidden w-full">
-        {/* LINE 1: FIRST NAME (Passing BEHIND the 3D sculpture) */}
-        <div className="w-full flex justify-between items-center z-10 pointer-events-none">
+      {/* TOP BAR (56px) */}
+      <div className="relative z-20 pointer-events-auto">
+        <Nav onMenuClick={onMenuClick} />
+      </div>
+
+      {/* HERO CENTER SECTION WITH GIANT CONDENSED DISPLAY TYPE */}
+      <div className="relative flex-1 flex flex-col justify-center items-center px-5 md:px-10 overflow-hidden w-full z-10 pointer-events-none">
+        {/* LINE 1: FIRST NAME */}
+        <div className="w-full flex justify-between items-center">
           <h1 className="giant-title font-display text-ink w-full text-center flex justify-between select-none">
             {firstNameLetters.map((char, index) => (
               <span key={`first-${index}`}>{char}</span>
@@ -25,25 +37,8 @@ export function Hero({ onMenuClick }: HeroProps) {
           </h1>
         </div>
 
-        {/* CENTERED 3D SCULPTURAL OBJECT (Overlaps First and Second Name) */}
-        <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
-          <div className="relative w-[280px] h-[450px] sm:w-[340px] sm:h-[540px] md:w-[380px] md:h-[600px] flex flex-col items-center justify-center">
-            {/* Rendered Image */}
-            <img
-              src="/hero-sculpture.png"
-              alt="Monolithic sculptural 3D object in ink and chrome metal with signal red accent (Placeholder render)"
-              className="w-full h-full object-contain mix-blend-multiply"
-              loading="eager"
-            />
-            {/* Editorial Mono Placeholder Tag */}
-            <div className="absolute bottom-4 bg-paper/90 px-2 py-0.5 border border-ink text-[11px] font-mono tracking-widest uppercase text-ink whitespace-nowrap">
-              [PLACEHOLDER // 3D SCULPTURE OBJECT]
-            </div>
-          </div>
-        </div>
-
-        {/* LINE 2: LAST NAME (Passing IN FRONT OF the 3D sculpture) */}
-        <div className="w-full flex justify-between items-center z-30 pointer-events-none">
+        {/* LINE 2: LAST NAME */}
+        <div className="w-full flex justify-between items-center">
           <div
             aria-hidden="true"
             className="giant-title font-display text-ink w-full text-center flex justify-between select-none"
@@ -55,8 +50,8 @@ export function Hero({ onMenuClick }: HeroProps) {
         </div>
       </div>
 
-      {/* BOTTOM ROW */}
-      <footer className="w-full px-5 md:px-10 pb-8 pt-4 grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-0 items-end z-40 bg-paper">
+      {/* BOTTOM ROW WITH PAPER GROUND SHIELD FOR 100% CONTRAST */}
+      <footer className="w-full px-5 md:px-10 pb-8 pt-16 md:pt-28 grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-0 items-end z-20 relative pointer-events-auto bg-gradient-to-t from-paper via-paper/95 via-60% to-transparent">
         {/* Left: Positioning (max 4 columns) */}
         <div className="col-span-1 md:col-span-5 pr-0 md:pr-6">
           <p className="font-body text-[17px] sm:text-[19px] md:text-[22px] leading-[1.35] text-ink font-normal tracking-tight max-w-[500px]">

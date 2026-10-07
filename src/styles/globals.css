@@ -79,3 +79,28 @@ body {
   text-transform: uppercase;
   font-weight: 900;
 }
+
+/* Infinite edge-to-edge marquee for Beyond section */
+@keyframes marquee-infinite {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-marquee-infinite {
+  display: flex;
+  width: max-content;
+  animation: marquee-infinite 35s linear infinite;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee-infinite {
+    animation: none;
+    transform: none;
+  }
+}
+
