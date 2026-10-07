@@ -32,8 +32,8 @@ export const personalInfo: PersonalInfo = {
   location: "Yogyakarta",
   timezone: "Asia/Jakarta",
   email: "himawanfirza21@gmail.com",
-  availability: "Available March 2026",
-  availableDate: "March 2026",
+  availability: "Available Now",
+  availableDate: "Now",
   positioning:
     "Software engineer specializing in high-performance web applications, scalable backend architectures, intelligent recommendation systems, and open-source developer tooling.",
   statement: {

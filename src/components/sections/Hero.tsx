@@ -1,6 +1,7 @@
 import { Nav } from "../layout/Nav.tsx";
 import { personalInfo } from "../../content/personal.ts";
 import { SylvaLivingWorldScene } from "../../shaders/sylva-living-world/SylvaLivingWorldScene.tsx";
+import faceheroImage from "../../assets/facehero.png";
 
 export interface HeroProps {
   onMenuClick?: () => void;
@@ -12,18 +13,33 @@ export function Hero({ onMenuClick }: HeroProps) {
 
   return (
     <section className="bg-paper text-ink relative flex flex-col justify-between min-h-screen w-full select-none overflow-hidden">
+      {/* BACKGROUND IMAGE (z-0): Editorial studio portrait */}
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden select-none">
+        <img
+          src={faceheroImage}
+          alt=""
+          aria-hidden="true"
+          className="w-full h-full object-cover object-[80%_center] md:object-right lg:object-center opacity-95"
+          loading="eager"
+        />
+      </div>
+
       {/* LAYER 1 (z-10): LAST NAME "HIMAWAN" (Placed BEHIND the 3D tree scene) */}
-      <div className="absolute inset-0 flex flex-col justify-center items-center px-5 md:px-10 overflow-hidden w-full z-10 pointer-events-none">
+      <div className="absolute inset-0 flex flex-col justify-center items-start px-5 md:px-10 overflow-hidden w-full z-10 pointer-events-none">
         {/* Invisible spacer for Line 1 (FIRZA) */}
-        <div className="w-full flex justify-between items-center opacity-0 select-none" aria-hidden="true">
-          <span className="giant-title font-display">FIRZA</span>
+        <div className="w-full flex justify-start items-center opacity-0 select-none" aria-hidden="true">
+          <span className="giant-title font-display flex gap-[clamp(8px,1.8vw,28px)]">
+            {firstNameLetters.map((char, index) => (
+              <span key={`spacer-first-${index}`}>{char}</span>
+            ))}
+          </span>
         </div>
 
         {/* LINE 2: LAST NAME (HIMAWAN) */}
-        <div className="w-full flex justify-between items-center">
+        <div className="w-full flex justify-start items-center">
           <div
             aria-hidden="true"
-            className="giant-title font-display text-ink w-full text-center flex justify-between select-none"
+            className="giant-title font-display text-ink flex gap-[clamp(8px,1.8vw,28px)] select-none"
           >
             {lastNameLetters.map((char, index) => (
               <span key={`last-${index}`}>{char}</span>
@@ -47,10 +63,10 @@ export function Hero({ onMenuClick }: HeroProps) {
       </div>
 
       {/* LAYER 3 (z-30): LINE 1 FIRST NAME "FIRZA" (Passing IN FRONT OF the 3D scene) */}
-      <div className="relative flex-1 flex flex-col justify-center items-center px-5 md:px-10 overflow-hidden w-full z-30 pointer-events-none">
+      <div className="relative flex-1 flex flex-col justify-center items-start px-5 md:px-10 overflow-hidden w-full z-30 pointer-events-none">
         {/* LINE 1: FIRST NAME (FIRZA) */}
-        <div className="w-full flex justify-between items-center">
-          <h1 className="giant-title font-display text-ink w-full text-center flex justify-between select-none">
+        <div className="w-full flex justify-start items-center">
+          <h1 className="giant-title font-display text-ink flex gap-[clamp(8px,1.8vw,28px)] select-none">
             {firstNameLetters.map((char, index) => (
               <span key={`first-${index}`}>{char}</span>
             ))}
@@ -58,8 +74,12 @@ export function Hero({ onMenuClick }: HeroProps) {
         </div>
 
         {/* Invisible spacer for Line 2 (HIMAWAN) */}
-        <div className="w-full flex justify-between items-center opacity-0 select-none" aria-hidden="true">
-          <span className="giant-title font-display">HIMAWAN</span>
+        <div className="w-full flex justify-start items-center opacity-0 select-none" aria-hidden="true">
+          <span className="giant-title font-display flex gap-[clamp(8px,1.8vw,28px)]">
+            {lastNameLetters.map((char, index) => (
+              <span key={`spacer-last-${index}`}>{char}</span>
+            ))}
+          </span>
         </div>
       </div>
 
