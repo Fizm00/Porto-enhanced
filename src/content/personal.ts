@@ -11,6 +11,8 @@ export interface PersonalInfo {
   timezone: string;
   email: string;
   availability: string;
+  availableDate: string;
+  positioning: string;
   statement: {
     lead: string;
     keyword: string;
@@ -27,7 +29,10 @@ export const personalInfo: PersonalInfo = {
   location: "Yogyakarta",
   timezone: "Asia/Jakarta",
   email: "[PLACEHOLDER]", // e.g. "firza@example.com"
-  availability: "[PLACEHOLDER]", // e.g. "Available for select commissions starting Q2."
+  availability: "Available March 2026",
+  availableDate: "March 2026",
+  positioning:
+    "Software engineer specializing in high-performance web applications, scalable backend architectures, intelligent recommendation systems, and open-source developer tooling.",
   statement: {
     lead: "[PLACEHOLDER]",
     keyword: "[PLACEHOLDER]", // single statement keyword rendered in Signal color
