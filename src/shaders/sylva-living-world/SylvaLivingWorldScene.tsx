@@ -10,7 +10,6 @@ export type SylvaLivingWorldSceneProps = {
   variant?: SylvaLivingWorldVariant;
   className?: string;
   style?: CSSProperties;
-  paperBg?: boolean;
 };
 
 const SCENE_ONLY_MARKUP = (label: string) => `<main class="hero" id="hero">
@@ -1168,8 +1167,8 @@ export function applyMapleAutumnVariant(source: string) {
     ],
     ["var nearLimbs = buildNearRoot();", "var nearLimbs = buildBoughs();", "near bough composition"],
     ["assembleRoot(buildFarRoot(), {", "assembleRoot(buildGrove(), {", "far grove composition"],
-    ["var BLADES_NEAR = small ? 70000 : 190000;", "var BLADES_NEAR = small ? 8000 : 18000;", "deep near cushion"],
-    ["var BLADES_FAR  = small ? 20000 :  60000;", "var BLADES_FAR  = small ? 2000 :  4500;", "thin far cushion"],
+    ["var BLADES_NEAR = small ? 70000 : 190000;", "var BLADES_NEAR = small ? 140000 : 260000;", "deep near cushion"],
+    ["var BLADES_FAR  = small ? 20000 :  60000;", "var BLADES_FAR  = small ? 9000 :  22000;", "thin far cushion"],
     /* the recursive crown already forks every twig it needs */
     ["for (var i = 0; i < 14; i++) {", "for (var i = 0; i < 0; i++) {", "no stub offshoots"],
 
@@ -1344,7 +1343,7 @@ export function applyMapleAutumnVariant(source: string) {
     ],
     [
       "      blades: BLADES_NEAR, ferns: small ? 26 : 46, flowers: small ? 120 : 260,\n      fernSize: [0.22, 0.50], flowerSize: [0.055, 0.118], mainLimbs: mainCount, wire: true,",
-      "      blades: BLADES_NEAR, ferns: small ? 10 : 18, flowers: small ? 280 : 560,\n      fernSize: [0.16, 0.36], flowerSize: [0.230, 0.420], mainLimbs: 0, wire: true,",
+      "      blades: BLADES_NEAR, ferns: small ? 14 : 26, flowers: small ? 2600 : 5000,\n      fernSize: [0.16, 0.36], flowerSize: [0.230, 0.420], mainLimbs: 0, wire: true,",
       "near boughs in full leaf",
     ],
     [
@@ -1355,7 +1354,7 @@ export function applyMapleAutumnVariant(source: string) {
     ["hazeCol: [0.150, 0.164, 0.120], hazeLift: 0.92,", "hazeCol: [0.224, 0.260, 0.290], hazeLift: 0.94,", "far sunset haze"],
     [
       "      blades: BLADES_FAR, ferns: small ? 8 : 16, flowers: small ? 40 : 90,\n      fernSize: [0.26, 0.56], flowerSize: [0.034, 0.062],\n      mask: [0.4, 3.4, 0.0, 0.42], wire: true,",
-      "      blades: BLADES_FAR, ferns: 0, flowers: small ? 160 : 350,\n      fernSize: [0.26, 0.56], flowerSize: [0.100, 0.190],\n      mask: [4.6, 5.6, -0.14, 0.20], wire: true,",
+      "      blades: BLADES_FAR, ferns: 0, flowers: small ? 1600 : 3600,\n      fernSize: [0.26, 0.56], flowerSize: [0.100, 0.190],\n      mask: [4.6, 5.6, -0.14, 0.20], wire: true,",
       "far grove in leaf",
     ],
     [
@@ -1371,8 +1370,8 @@ export function applyMapleAutumnVariant(source: string) {
   var FAR_N  = { w:  920, left:  280, top:  902, aspect: 1600 /  757, z: -260 };`,
       "framing boxes",
     ],
-    ["place(nearGroup, A, 0.732, 0.06, 0);", "place(nearGroup, A, 0.500, 0.440, 0);", "tree framing"],
-    ["place(farGroup,  F, 0.410, 0.32, F.z);", "place(farGroup,  F, 0.500, 0.440, F.z);", "grove framing"],
+    ["place(nearGroup, A, 0.732, 0.06, 0);", "place(nearGroup, A, 0.500, 0.500, 0);", "tree framing"],
+    ["place(farGroup,  F, 0.410, 0.32, F.z);", "place(farGroup,  F, 0.500, 0.500, F.z);", "grove framing"],
 
     /* ---- ambient ---- */
     [
@@ -1421,7 +1420,7 @@ export function applyMapleAutumnVariant(source: string) {
     ],
     [
       "var COUNT = (NARROW.matches || (window.innerWidth * window.innerHeight) < 620000) ? 1500 : 4200;",
-      "var COUNT = (NARROW.matches || (window.innerWidth * window.innerHeight) < 620000) ? 40 : 90;",
+      "var COUNT = (NARROW.matches || (window.innerWidth * window.innerHeight) < 620000) ? 140 : 340;",
       "leaf count",
     ],
     [
@@ -1494,28 +1493,7 @@ export function applyMapleAutumnVariant(source: string) {
   );
 }
 
-const PAPER_WHITE_SCENE_STYLE = `<style data-threeui-sylva-paper-bg>
-html,
-body {
-  background: #F2EFE8 !important;
-}
-.hero {
-  background:
-    radial-gradient(66% 56% at 26% 90%, rgba(255, 216, 176, 0.20) 0%, rgba(255, 216, 176, 0) 74%),
-    radial-gradient(74% 64% at 92% 2%, rgba(242, 239, 232, 0.40) 0%, rgba(242, 239, 232, 0) 72%),
-    #F2EFE8 !important;
-}
-.hero::after {
-  background:
-    radial-gradient(76% 48% at 44% 118%, rgba(255, 206, 158, 0.24) 0%, rgba(255, 194, 150, 0.08) 44%, rgba(255, 188, 146, 0) 86%),
-    linear-gradient(180deg, rgba(255, 206, 160, 0) 56%, rgba(255, 200, 156, 0.028) 78%, rgba(255, 206, 160, 0.070) 100%) !important;
-}
-#scene {
-  opacity: 1 !important;
-}
-</style>`;
-
-function buildSceneDocument(reducedMotion: boolean, variant: SylvaLivingWorldVariant, paperBg = false) {
+function buildSceneDocument(reducedMotion: boolean, variant: SylvaLivingWorldVariant) {
   const presentationStart = innerGreenSource.indexOf('<main class="hero" id="hero">');
   const runtimeStart = innerGreenSource.indexOf('<script src="inner-green-assets/three.min.js"></script>');
 
@@ -1523,11 +1501,9 @@ function buildSceneDocument(reducedMotion: boolean, variant: SylvaLivingWorldVar
     throw new Error("Sylva scene adapter could not isolate the authored Three.js scene.");
   }
 
-  const paperStyle = paperBg ? PAPER_WHITE_SCENE_STYLE : "";
-
   let documentSource = `${innerGreenSource.slice(0, presentationStart)}${SCENE_ONLY_MARKUP(VARIANT_LABELS[variant])}\n\n${innerGreenSource.slice(runtimeStart)}`
     .replace("<title>Sylva — Into the living world</title>", `<title>${VARIANT_LABELS[variant]}</title>`)
-    .replace("</head>", `${SCENE_ONLY_STYLE}${paperStyle || (VARIANT_STYLES[variant] ?? "")}</head>`)
+    .replace("</head>", `${SCENE_ONLY_STYLE}${VARIANT_STYLES[variant] ?? ""}</head>`)
     .replace(
       '<script src="inner-green-assets/three.min.js"></script>',
       `<script data-threeui-three-runtime>${threeRuntime}</script>`,
@@ -1544,54 +1520,6 @@ function buildSceneDocument(reducedMotion: boolean, variant: SylvaLivingWorldVar
     );
   }
 
-  // 60 FPS performance optimizations: cap devicePixelRatio to 1.0, request high-performance GPU, and pause offscreen
-  const startTickNeedle = `  function startTick() {
-    if (ticking) return;
-    ticking = true;
-    (function loop() { requestAnimationFrame(loop); tick(); })();
-  }`;
-
-  const startTickOptimized = `  var __isPaused = false;
-  window.addEventListener('message', function (e) {
-    if (!e || !e.data) return;
-    if (e.data.type === 'sylva-pause') {
-      __isPaused = true;
-    } else if (e.data.type === 'sylva-resume') {
-      if (__isPaused) {
-        __isPaused = false;
-        startTick();
-      }
-    }
-  });
-
-  function startTick() {
-    if (ticking || __isPaused) return;
-    ticking = true;
-    var lastFrameTime = performance.now();
-    (function loop() {
-      if (__isPaused) {
-        ticking = false;
-        return;
-      }
-      requestAnimationFrame(loop);
-      var now = performance.now();
-      if (now - lastFrameTime < 15.5) return;
-      lastFrameTime = now;
-      tick();
-    })();
-  }`;
-
-  documentSource = documentSource
-    .replace(startTickNeedle, startTickOptimized)
-    .replace(
-      "setPixelRatio(Math.min(window.devicePixelRatio || 1, small ? 1.6 : 2));",
-      "setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.0));",
-    )
-    .replace(
-      "new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: !small });",
-      "new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: false, powerPreference: 'high-performance' });",
-    );
-
   return documentSource;
 }
 
@@ -1599,54 +1527,49 @@ export function SylvaLivingWorldScene({
   variant = "living-green",
   className = "",
   style,
-  paperBg = false,
 }: SylvaLivingWorldSceneProps) {
   const safeVariant = SYLVA_LIVING_WORLD_VARIANTS.includes(variant) ? variant : "living-green";
   const hostRef = useRef<HTMLDivElement>(null);
-  const iframeRef = useRef<HTMLIFrameElement>(null);
+  const [hostVisible, setHostVisible] = useState(true);
+  const [documentVisible, setDocumentVisible] = useState(() => (
+    typeof document === "undefined" || !document.hidden
+  ));
+  const [reducedMotion, setReducedMotion] = useState(() => (
+    typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  ));
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
     const host = hostRef.current;
     if (!host || typeof IntersectionObserver === "undefined") return undefined;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        const isVisible = entry?.isIntersecting ?? true;
-        if (iframeRef.current?.contentWindow) {
-          iframeRef.current.contentWindow.postMessage(
-            { type: isVisible ? "sylva-resume" : "sylva-pause" },
-            "*"
-          );
-        }
-      },
-      { threshold: 0.02 }
-    );
+    const observer = new IntersectionObserver(([entry]) => setHostVisible(entry?.isIntersecting ?? true));
     observer.observe(host);
     return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
     if (typeof document === "undefined") return undefined;
-    const update = () => {
-      const isVisible = !document.hidden;
-      if (iframeRef.current?.contentWindow) {
-        iframeRef.current.contentWindow.postMessage(
-          { type: isVisible ? "sylva-resume" : "sylva-pause" },
-          "*"
-        );
-      }
-    };
+    const update = () => setDocumentVisible(!document.hidden);
     document.addEventListener("visibilitychange", update);
     return () => document.removeEventListener("visibilitychange", update);
   }, []);
 
-  const [reducedMotion] = useState(() => (
-    typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
-  ));
+  useEffect(() => {
+    if (typeof window === "undefined") return undefined;
+    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const update = () => setReducedMotion(media.matches);
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, []);
 
-  const source = useMemo(() => buildSceneDocument(reducedMotion, safeVariant, paperBg), [reducedMotion, safeVariant, paperBg]);
+  const source = useMemo(() => buildSceneDocument(reducedMotion, safeVariant), [reducedMotion, safeVariant]);
+  const mounted = hostVisible && documentVisible;
   const label = VARIANT_LABELS[safeVariant];
-  const background = paperBg ? "#F2EFE8" : VARIANT_BACKGROUNDS[safeVariant];
+  const background = VARIANT_BACKGROUNDS[safeVariant];
+
+  useEffect(() => {
+    setReady(false);
+  }, [mounted, reducedMotion, safeVariant]);
 
   return (
     <div
@@ -1658,25 +1581,25 @@ export function SylvaLivingWorldScene({
       data-state={ready ? "ready" : "loading"}
       style={{ background, pointerEvents: "auto", ...style }}
     >
-      <iframe
-        ref={iframeRef}
-        title={label}
-        srcDoc={source}
-        sandbox="allow-scripts"
-        loading="eager"
-        onLoad={() => setReady(true)}
-        style={{
-          position: "absolute",
-          inset: 0,
-          display: "block",
-          width: "100%",
-          height: "100%",
-          border: 0,
-          background,
-        }}
-      />
+      {mounted ? (
+        <iframe
+          key={`${safeVariant}-${reducedMotion ? "reduced" : "motion"}`}
+          title={label}
+          srcDoc={source}
+          sandbox="allow-scripts"
+          loading="eager"
+          onLoad={() => setReady(true)}
+          style={{
+            position: "absolute",
+            inset: 0,
+            display: "block",
+            width: "100%",
+            height: "100%",
+            border: 0,
+            background,
+          }}
+        />
+      ) : null}
     </div>
   );
 }
-
-export default SylvaLivingWorldScene;
