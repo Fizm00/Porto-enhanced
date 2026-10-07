@@ -1539,29 +1539,10 @@ export function SylvaLivingWorldScene({
 }: SylvaLivingWorldSceneProps) {
   const safeVariant = SYLVA_LIVING_WORLD_VARIANTS.includes(variant) ? variant : "living-green";
   const hostRef = useRef<HTMLDivElement>(null);
-  const [hostVisible, setHostVisible] = useState(true);
-  const [documentVisible, setDocumentVisible] = useState(() => (
-    typeof document === "undefined" || !document.hidden
-  ));
   const [reducedMotion, setReducedMotion] = useState(() => (
     typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
   ));
   const [ready, setReady] = useState(false);
-
-  useEffect(() => {
-    const host = hostRef.current;
-    if (!host || typeof IntersectionObserver === "undefined") return undefined;
-    const observer = new IntersectionObserver(([entry]) => setHostVisible(entry?.isIntersecting ?? true));
-    observer.observe(host);
-    return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    if (typeof document === "undefined") return undefined;
-    const update = () => setDocumentVisible(!document.hidden);
-    document.addEventListener("visibilitychange", update);
-    return () => document.removeEventListener("visibilitychange", update);
-  }, []);
 
   useEffect(() => {
     if (typeof window === "undefined") return undefined;
@@ -1572,13 +1553,8 @@ export function SylvaLivingWorldScene({
   }, []);
 
   const source = useMemo(() => buildSceneDocument(reducedMotion, safeVariant, transparentBg), [reducedMotion, safeVariant, transparentBg]);
-  const mounted = hostVisible && documentVisible;
   const label = VARIANT_LABELS[safeVariant];
   const background = transparentBg ? "transparent" : VARIANT_BACKGROUNDS[safeVariant];
-
-  useEffect(() => {
-    setReady(false);
-  }, [mounted, reducedMotion, safeVariant]);
 
   return (
     <div
@@ -1590,25 +1566,23 @@ export function SylvaLivingWorldScene({
       data-state={ready ? "ready" : "loading"}
       style={{ background, pointerEvents: "auto", ...style }}
     >
-      {mounted ? (
-        <iframe
-          key={`${safeVariant}-${reducedMotion ? "reduced" : "motion"}`}
-          title={label}
-          srcDoc={source}
-          sandbox="allow-scripts"
-          loading="eager"
-          onLoad={() => setReady(true)}
-          style={{
-            position: "absolute",
-            inset: 0,
-            display: "block",
-            width: "100%",
-            height: "100%",
-            border: 0,
-            background,
-          }}
-        />
-      ) : null}
+      <iframe
+        key={`${safeVariant}-${reducedMotion ? "reduced" : "motion"}`}
+        title={label}
+        srcDoc={source}
+        sandbox="allow-scripts"
+        loading="eager"
+        onLoad={() => setReady(true)}
+        style={{
+          position: "absolute",
+          inset: 0,
+          display: "block",
+          width: "100%",
+          height: "100%",
+          border: 0,
+          background,
+        }}
+      />
     </div>
   );
 }
