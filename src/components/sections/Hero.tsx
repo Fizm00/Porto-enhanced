@@ -13,13 +13,13 @@ export function Hero({ onMenuClick }: HeroProps) {
 
   return (
     <section className="bg-paper text-ink relative flex flex-col justify-between min-h-screen w-full select-none overflow-hidden">
-      {/* BACKGROUND IMAGE (z-0): Editorial studio portrait */}
-      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden select-none">
+      {/* BACKGROUND IMAGE (z-0): Editorial studio portrait (Zoomed out & right-aligned) */}
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden select-none flex justify-end items-end">
         <img
           src={faceheroImage}
           alt=""
           aria-hidden="true"
-          className="w-full h-full object-cover object-[80%_center] md:object-right lg:object-center opacity-95"
+          className="h-[60vh] sm:h-[72vh] md:h-[84vh] lg:h-[88vh] max-h-[800px] w-auto max-w-full md:max-w-[65vw] object-contain object-bottom md:object-right-bottom mix-blend-multiply opacity-95 md:scale-[0.82] lg:scale-[0.78] origin-bottom-right select-none"
           loading="eager"
         />
       </div>
