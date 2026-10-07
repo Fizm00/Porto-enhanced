@@ -16,7 +16,9 @@ export interface PersonalInfo {
   statement: {
     lead: string;
     keyword: string;
-    tail: string;
+    revealed: string;
+    dimmed: string;
+    full: string;
   };
   bio: string[];
   facts: PersonalFact[];
@@ -34,9 +36,14 @@ export const personalInfo: PersonalInfo = {
   positioning:
     "Software engineer specializing in high-performance web applications, scalable backend architectures, intelligent recommendation systems, and open-source developer tooling.",
   statement: {
-    lead: "[PLACEHOLDER]",
-    keyword: "[PLACEHOLDER]", // single statement keyword rendered in Signal color
-    tail: "[PLACEHOLDER]",
+    lead: "I BUILD SYSTEMS LIKE I TUNE HARDWARE:",
+    keyword: "RELENTLESS",
+    revealed:
+      "ABOUT LATENCY, UNCOMPROMISING ON PRECISION. WHETHER SCALING RECOMMENDATION ENGINES IN NODE OR INSPECTING MONGOOSE QUERIES AT MIDNIGHT,",
+    dimmed:
+      "I CRAFT RESILIENT BACKENDS THAT NEVER CRUMBLE UNDER LOAD AND MAKE COMPLEX ARCHITECTURES LOOK EFFORTLESS.",
+    full:
+      "I BUILD SYSTEMS LIKE I TUNE HARDWARE: RELENTLESS ABOUT LATENCY, UNCOMPROMISING ON PRECISION. WHETHER SCALING RECOMMENDATION ENGINES IN NODE OR INSPECTING MONGOOSE QUERIES AT MIDNIGHT, I CRAFT RESILIENT BACKENDS THAT NEVER CRUMBLE UNDER LOAD AND MAKE COMPLEX ARCHITECTURES LOOK EFFORTLESS.",
   },
   bio: [
     "[PLACEHOLDER]",
