@@ -1,0 +1,72 @@
+@import "tailwindcss";
+@import "./fonts.css";
+
+@theme {
+  /* Colors */
+  --color-ink: #0E0E0E;
+  --color-paper: #F2EFE8;
+  --color-signal: #FF4A1C;
+  --color-stone: #8A867D;
+
+  --color-primary: #0E0E0E;
+  --color-secondary: #F2EFE8;
+  --color-tertiary: #FF4A1C;
+  --color-neutral: #8A867D;
+  --color-surface: #F2EFE8;
+  --color-surface-inverse: #0E0E0E;
+  --color-on-surface: #0E0E0E;
+  --color-on-surface-inverse: #F2EFE8;
+  --color-accent: #FF4A1C;
+  --color-line: #0E0E0E;
+
+  /* Typography */
+  --font-display: "Big Shoulders Display", sans-serif;
+  --font-body: "Instrument Sans", sans-serif;
+  --font-mono: "DM Mono", monospace;
+
+  /* Corner Radius */
+  --radius-none: 0px;
+  --radius-xs: 0px;
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+  --radius-2xl: 0px;
+  --radius-3xl: 0px;
+  --radius-full: 9999px;
+
+  /* Spacing */
+  --spacing-gutter: 24px;
+  --spacing-margin-desktop: 40px;
+  --spacing-margin-mobile: 20px;
+  --spacing-section-y: 160px;
+}
+
+/* Global Reset & Strict Fallback (No Serif Anywhere) */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+}
+
+/* Tabular numbers for counters/indexes as specified in DESIGN.md */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
