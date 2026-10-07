@@ -10,6 +10,7 @@ export type SylvaLivingWorldSceneProps = {
   variant?: SylvaLivingWorldVariant;
   className?: string;
   style?: CSSProperties;
+  transparentBg?: boolean;
 };
 
 const SCENE_ONLY_MARKUP = (label: string) => `<main class="hero" id="hero">
@@ -1493,7 +1494,7 @@ export function applyMapleAutumnVariant(source: string) {
   );
 }
 
-function buildSceneDocument(reducedMotion: boolean, variant: SylvaLivingWorldVariant) {
+function buildSceneDocument(reducedMotion: boolean, variant: SylvaLivingWorldVariant, transparentBg = false) {
   const presentationStart = innerGreenSource.indexOf('<main class="hero" id="hero">');
   const runtimeStart = innerGreenSource.indexOf('<script src="inner-green-assets/three.min.js"></script>');
 
@@ -1520,6 +1521,13 @@ function buildSceneDocument(reducedMotion: boolean, variant: SylvaLivingWorldVar
     );
   }
 
+  if (transparentBg) {
+    documentSource = documentSource.replace(
+      "</head>",
+      `<style data-threeui-transparent-bg>html, body, .hero, .hero::after { background: transparent !important; }</style></head>`,
+    );
+  }
+
   return documentSource;
 }
 
@@ -1527,6 +1535,7 @@ export function SylvaLivingWorldScene({
   variant = "living-green",
   className = "",
   style,
+  transparentBg = false,
 }: SylvaLivingWorldSceneProps) {
   const safeVariant = SYLVA_LIVING_WORLD_VARIANTS.includes(variant) ? variant : "living-green";
   const hostRef = useRef<HTMLDivElement>(null);
@@ -1562,10 +1571,10 @@ export function SylvaLivingWorldScene({
     return () => media.removeEventListener("change", update);
   }, []);
 
-  const source = useMemo(() => buildSceneDocument(reducedMotion, safeVariant), [reducedMotion, safeVariant]);
+  const source = useMemo(() => buildSceneDocument(reducedMotion, safeVariant, transparentBg), [reducedMotion, safeVariant, transparentBg]);
   const mounted = hostVisible && documentVisible;
   const label = VARIANT_LABELS[safeVariant];
-  const background = VARIANT_BACKGROUNDS[safeVariant];
+  const background = transparentBg ? "transparent" : VARIANT_BACKGROUNDS[safeVariant];
 
   useEffect(() => {
     setReady(false);

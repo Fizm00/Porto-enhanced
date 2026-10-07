@@ -23,5 +23,15 @@ dist-ssr
 *.sln
 *.sw?
 
-# Testing artifacts
-screenshot-*.png
+# Testing artifacts & screenshots
+screenshot*
+screenshots*
+*.png
+!public/**
+!src/assets/**
+
+# Project documentation & agent instructions
+AGENTS.md
+GEMINI.md
+DESIGN.md
+DESIGN..md
