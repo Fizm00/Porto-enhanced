@@ -264,7 +264,7 @@ export const Contact: React.FC<ContactProps> = ({
                 LinkedIn
               </a>
               <a
-                href="https://erdamotor.id"
+                href="https://fizm-portofolio.vercel.app"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-paper transition-colors duration-150 py-1"
