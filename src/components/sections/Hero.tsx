@@ -2,7 +2,7 @@ import { Nav } from "../layout/Nav.tsx";
 import { personalInfo } from "../../content/personal.ts";
 import { SylvaLivingWorldScene } from "../../shaders/sylva-living-world/SylvaLivingWorldScene.tsx";
 import { LiquidReveal } from "../ui/LiquidReveal.tsx";
-import faceheroImage from "../../assets/facehero.png";
+import faceheroImage from "../../assets/facehero1.png";
 import facehero3Image from "../../assets/facehero3.png";
 
 export interface HeroProps {
