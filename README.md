@@ -1,75 +1,89 @@
-# React + TypeScript + Vite
+# Firza Himawan — Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> High-performance, editorial personal portfolio of Firza Himawan, Software Engineer based in Yogyakarta. Built with Vite, React 19, TypeScript, Tailwind CSS v4, GSAP, and Lenis.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## ⚡ Tech Stack
 
-## React Compiler
+- **Framework**: [React 19](https://react.dev/) + [Vite](https://vite.dev/)
+- **Language**: [TypeScript](https://www.typescriptlang.org/) (Strict mode)
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/) with design tokens defined in `@theme`
+- **Animation & Motion**: [GSAP](https://greensock.com/gsap/) (`useGSAP`, `ScrollTrigger`) + [Lenis](https://lenis.darkroom.engineering/) (Smooth Scroll)
+- **Routing**: [wouter](https://github.com/molefrog/wouter) (Minimalist router)
+- **3D & Shaders**: Interactive ThreeUI scene & fluid WebGL transitions
+- **Self-hosted Typography**: `@fontsource/big-shoulders-display`, `@fontsource/instrument-sans`, `@fontsource/dm-mono`
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 📁 Project Structure
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```text
+src/
+├── assets/             # Brand and visual assets
+├── components/
+│   ├── layout/         # Nav, MenuOverlay, Preloader
+│   ├── sections/       # Hero, Statement, WorkPanels, WorkIndex, Skills, Beyond, Contact
+│   └── ui/             # FitText, LiquidReveal
+├── content/            # Data source files (projects.ts, personal.ts, skills.ts, site.ts)
+├── hooks/              # useLenis, useReducedMotion
+├── lib/                # gsap registry, motion tokens
+├── pages/              # Home, Project (work/:slug), Work, BeyondPage, ContactPage, NotFound
+├── shaders/            # WebGL & 3D scene modules
+├── styles/             # globals.css (@theme), fonts.css
+├── App.tsx             # Root routing and preloader orchestration
+└── main.tsx            # Application entry point
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🛠️ Local Development
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+1. **Install dependencies**:
+   ```bash
+   npm install
+   ```
 
+2. **Start the development server**:
+   ```bash
+   npm run dev
+   ```
+
+3. **Check build & types**:
+   ```bash
+   npm run build
+   ```
+
+4. **Lint codebase**:
+   ```bash
+   npm run lint
+   ```
+
+---
+
+## 🚀 Deploy to Vercel
+
+### Option 1: Vercel Git Integration (Recommended)
+1. Push your repository to GitHub / GitLab / Bitbucket:
+   ```bash
+   git push origin master
+   ```
+2. Go to [vercel.com](https://vercel.com) and import the repository.
+3. Vercel will automatically detect **Vite**:
+   - **Framework Preset**: `Vite`
+   - **Build Command**: `npm run build`
+   - **Output Directory**: `dist`
+   - **Install Command**: `npm install`
+4. Click **Deploy**. The included `vercel.json` ensures SPA rewrites work seamlessly for all `/work/:slug` URLs with zero 404 errors.
+
+### Option 2: Vercel CLI
+```bash
+# Install Vercel CLI globally if not already installed
+npm i -g vercel
+
+# Deploy preview
+vercel
+
+# Deploy to production
+vercel --prod
 ```

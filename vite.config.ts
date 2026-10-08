@@ -20,9 +20,19 @@ export default defineConfig({
     cors: true,
   },
   build: {
+    chunkSizeWarningLimit: 1200,
     rollupOptions: {
       output: {
         manualChunks(id: string) {
+          if (id.includes("node_modules/react/") || id.includes("node_modules/react-dom/") || id.includes("node_modules/wouter/")) {
+            return "vendor-react";
+          }
+          if (id.includes("node_modules/gsap/") || id.includes("node_modules/@gsap/")) {
+            return "vendor-gsap";
+          }
+          if (id.includes("node_modules/lenis/")) {
+            return "vendor-lenis";
+          }
           if (id.includes("tech-stack-icons")) {
             return "tech-icons";
           }
