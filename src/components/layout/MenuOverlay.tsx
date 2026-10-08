@@ -129,7 +129,7 @@ export const MenuOverlay: React.FC<MenuOverlayProps> = ({
                 }}
                 className="font-display font-black uppercase text-ink transition-colors duration-150 block"
                 style={{
-                  fontSize: "clamp(72px, 14.5vw, 195px)",
+                  fontSize: "clamp(48px, 13.5vw, 195px)",
                   lineHeight: 0.92,
                   color: textColor,
                 }}
@@ -181,6 +181,15 @@ export const MenuOverlay: React.FC<MenuOverlayProps> = ({
               style={{ color: "#0E0E0E" }}
             >
               Website
+            </a>
+            <a
+              href={siteConfig.socialLinks.whatsapp}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-ink hover:opacity-80 transition-opacity"
+              style={{ color: "#0E0E0E" }}
+            >
+              WhatsApp
             </a>
           </div>
 

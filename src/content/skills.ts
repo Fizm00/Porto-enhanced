@@ -1,59 +1,202 @@
-export interface SkillItem {
+export type SkillCategory = "Languages" | "Frameworks" | "Data" | "Tooling";
+
+export interface Skill {
   name: string;
-  url: string;
+  category: SkillCategory;
+  daily: boolean;
+  usedIn: string[];
 }
 
-export interface SkillCategory {
-  title: string;
-  skills: SkillItem[];
-}
+export const skills: Skill[] = [
+  // ── Languages & Runtimes ──────────────────────────────────────────────────
+  {
+    name: "TypeScript",
+    category: "Languages",
+    daily: true,
+    usedIn: ["recovila", "nano-recommender", "mongoosleuth", "erdamotor"],
+  },
+  {
+    name: "JavaScript",
+    category: "Languages",
+    daily: true,
+    usedIn: ["nanma-finance"],
+  },
+  {
+    name: "Node.js",
+    category: "Languages",
+    daily: true,
+    usedIn: ["recovila", "nano-recommender", "mongoosleuth", "nanma-finance"],
+  },
+  {
+    name: "Python",
+    category: "Languages",
+    daily: true,
+    usedIn: ["recovila"],
+  },
+  {
+    name: "Java",
+    category: "Languages",
+    daily: false, // [PLACEHOLDER]
+    usedIn: [], // [PLACEHOLDER]
+  },
+  {
+    name: "Kotlin",
+    category: "Languages",
+    daily: false, // [PLACEHOLDER]
+    usedIn: [], // [PLACEHOLDER]
+  },
+  {
+    name: "PHP",
+    category: "Languages",
+    daily: false, // [PLACEHOLDER]
+    usedIn: [], // [PLACEHOLDER]
+  },
+  {
+    name: "HTML5",
+    category: "Languages",
+    daily: true,
+    usedIn: ["erdamotor", "nanma-finance", "recovila"],
+  },
+  {
+    name: "CSS3",
+    category: "Languages",
+    daily: true,
+    usedIn: ["erdamotor", "nanma-finance", "recovila"],
+  },
 
-export const skillCategories: SkillCategory[] = [
+  // ── Frameworks & Web ───────────────────────────────────────────────────────
   {
-    title: "LANGUAGES & RUNTIMES",
-    skills: [
-      { name: "TypeScript", url: "https://www.typescriptlang.org/" },
-      { name: "JavaScript", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript" },
-      { name: "Node.js", url: "https://nodejs.org/" },
-      { name: "Python", url: "https://www.python.org/" },
-      { name: "Java", url: "https://www.oracle.com/java/" },
-      { name: "Kotlin", url: "https://kotlinlang.org/" },
-      { name: "PHP", url: "https://www.php.net/" },
-      { name: "HTML5", url: "https://developer.mozilla.org/en-US/docs/Web/HTML" },
-      { name: "CSS3", url: "https://developer.mozilla.org/en-US/docs/Web/CSS" },
-    ],
+    name: "React",
+    category: "Frameworks",
+    daily: true,
+    usedIn: ["nanma-finance"],
   },
   {
-    title: "FRAMEWORKS & WEB",
-    skills: [
-      { name: "React", url: "https://reactjs.org/" },
-      { name: "Next.js", url: "https://nextjs.org/" },
-      { name: "Express.js", url: "https://expressjs.com/" },
-      { name: "Tailwind CSS", url: "https://tailwindcss.com/" },
-      { name: "Bootstrap", url: "https://getbootstrap.com/" },
-      { name: "Streamlit", url: "https://streamlit.io/" },
-    ],
+    name: "Next.js",
+    category: "Frameworks",
+    daily: true,
+    usedIn: ["recovila", "erdamotor"],
   },
   {
-    title: "DATABASES & MACHINE LEARNING",
-    skills: [
-      { name: "MongoDB", url: "https://www.mongodb.com/" },
-      { name: "Mongoose", url: "https://mongoosejs.com/" },
-      { name: "PostgreSQL", url: "https://www.postgresql.org/" },
-      { name: "Redis", url: "https://redis.io/" },
-      { name: "PyTorch", url: "https://pytorch.org/" },
-      { name: "TensorFlow", url: "https://www.tensorflow.org/" },
-    ],
+    name: "Express.js",
+    category: "Frameworks",
+    daily: true,
+    usedIn: ["nanma-finance"],
   },
   {
-    title: "TOOLING & DEVOPS",
-    skills: [
-      { name: "Git", url: "https://git-scm.com/" },
-      { name: "Postman", url: "https://www.postman.com/" },
-      { name: "Docker", url: "https://www.docker.com/" },
-      { name: "Figma", url: "https://www.figma.com/" },
-      { name: "Linux", url: "https://www.linux.org/" },
-      { name: "REST APIs", url: "https://restfulapi.net/" },
-    ],
+    name: "Tailwind CSS",
+    category: "Frameworks",
+    daily: true,
+    usedIn: ["erdamotor", "nanma-finance"],
+  },
+  {
+    name: "Bootstrap",
+    category: "Frameworks",
+    daily: false, // [PLACEHOLDER]
+    usedIn: [], // [PLACEHOLDER]
+  },
+  {
+    name: "Streamlit",
+    category: "Frameworks",
+    daily: false, // [PLACEHOLDER]
+    usedIn: [], // [PLACEHOLDER]
+  },
+
+  // ── Data & ML ─────────────────────────────────────────────────────────────
+  {
+    name: "MongoDB",
+    category: "Data",
+    daily: true,
+    usedIn: ["mongoosleuth"],
+  },
+  {
+    name: "Mongoose",
+    category: "Data",
+    daily: true,
+    usedIn: ["mongoosleuth"],
+  },
+  {
+    name: "PostgreSQL",
+    category: "Data",
+    daily: true,
+    usedIn: ["nanma-finance"],
+  },
+  {
+    name: "Redis",
+    category: "Data",
+    daily: true,
+    usedIn: ["recovila"],
+  },
+  {
+    name: "PyTorch",
+    category: "Data",
+    daily: false, // [PLACEHOLDER]
+    usedIn: [], // [PLACEHOLDER]
+  },
+  {
+    name: "TensorFlow",
+    category: "Data",
+    daily: false, // [PLACEHOLDER]
+    usedIn: [], // [PLACEHOLDER]
+  },
+
+  // ── Tooling & DevOps ──────────────────────────────────────────────────────
+  {
+    name: "Git",
+    category: "Tooling",
+    daily: true,
+    usedIn: ["recovila", "nano-recommender", "mongoosleuth", "erdamotor", "nanma-finance"],
+  },
+  {
+    name: "Postman",
+    category: "Tooling",
+    daily: true,
+    usedIn: ["recovila", "erdamotor", "nanma-finance"],
+  },
+  {
+    name: "Docker",
+    category: "Tooling",
+    daily: false, // [PLACEHOLDER]
+    usedIn: [], // [PLACEHOLDER]
+  },
+  {
+    name: "Figma",
+    category: "Tooling",
+    daily: false, // [PLACEHOLDER]
+    usedIn: ["erdamotor"],
+  },
+  {
+    name: "Linux",
+    category: "Tooling",
+    daily: true, // [PLACEHOLDER]
+    usedIn: [], // [PLACEHOLDER]
+  },
+  {
+    name: "REST APIs",
+    category: "Tooling",
+    daily: true,
+    usedIn: ["erdamotor", "recovila"],
   },
 ];
+
+export const skillCategories: SkillCategory[] = [
+  "Languages",
+  "Frameworks",
+  "Data",
+  "Tooling",
+];
+
+export const skillCategoryLabels: Record<SkillCategory, string> = {
+  Languages: "Languages",
+  Frameworks: "Frameworks",
+  Data: "Data",
+  Tooling: "Tooling",
+};
+
+export const projectSlugToName: Record<string, string> = {
+  "recovila": "Recovila",
+  "nano-recommender": "Nano-Recommender",
+  "mongoosleuth": "Mongoosleuth",
+  "erdamotor": "Erdamotor",
+  "nanma-finance": "Nanma Finance",
+};

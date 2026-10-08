@@ -95,35 +95,40 @@ export function WorkPanels({ forcedFrame, className = "" }: WorkPanelsProps) {
     <section
       ref={containerRef}
       id="work"
-      className={`relative w-full h-screen overflow-hidden bg-ink text-paper select-none ${className}`}
-      style={{ minHeight: "900px" }}
+      className={`relative w-full h-screen min-h-[580px] lg:min-h-[850px] overflow-hidden bg-ink text-paper select-none ${className}`}
       aria-label="Selected Work"
     >
       {/* =========================================================================
           FRAME A (Static) OR DYNAMIC INTERACTIVE BASE: PANEL 1
           ========================================================================= */}
       <div
-        className="work-panel-layer absolute inset-0 w-full h-full z-10"
-        style={
-          isFrameB
-            ? {
-                // In Frame B: left 55% is Project 1
-                clipPath: `inset(0% ${100 - frameBSplitPercent}% 0% 0%)`,
-              }
-            : undefined
-        }
+        className="work-panel-layer absolute inset-0 w-full h-full bg-ink"
+        style={{
+          backgroundColor: "#0E0E0E",
+          zIndex: 10,
+          ...(isFrameB
+            ? { clipPath: `inset(0% ${100 - frameBSplitPercent}% 0% 0%)` }
+            : {}),
+        }}
       >
-        {/* Full-bleed high contrast project image */}
+        {/* Full-bleed high contrast project image with calibrated dark tone */}
         <img
           src={project1.heroImage}
           alt={project1.title}
-          className="absolute inset-0 w-full h-full object-cover grayscale contrast-125 brightness-95"
+          className="absolute inset-0 w-full h-full object-cover grayscale opacity-65"
+          style={{ filter: "grayscale(100%) contrast(120%) brightness(0.42)" }}
           loading="eager"
         />
+        {/* Dark ink overlay */}
+        <div className="absolute inset-0 bg-ink/45 pointer-events-none" aria-hidden="true" />
+        {/* Top scrim for metadata readability */}
+        <div className="absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-ink/90 via-ink/45 to-transparent pointer-events-none z-10" aria-hidden="true" />
+        {/* Bottom scrim for giant project title readability */}
+        <div className="absolute inset-x-0 bottom-0 h-56 bg-gradient-to-t from-ink/95 via-ink/60 to-transparent pointer-events-none z-10" aria-hidden="true" />
 
         {/* Top-Left: Numbering & Section Name */}
-        <div className="absolute top-8 md:top-10 left-8 md:left-12 z-20">
-          <span className="font-mono text-[13px] md:text-[14px] tracking-[0.2em] text-paper uppercase select-none">
+        <div className="absolute top-6 md:top-10 left-5 md:left-12 z-20">
+          <span className="font-mono text-[12px] md:text-[14px] tracking-[0.16em] md:tracking-[0.2em] text-paper uppercase select-none">
             01 / 05 — SELECTED WORK
           </span>
         </div>
@@ -136,23 +141,23 @@ export function WorkPanels({ forcedFrame, className = "" }: WorkPanelsProps) {
         </div>
 
         {/* Top-Right: Year & Role in DM Mono */}
-        <div className="absolute top-8 md:top-10 right-14 md:right-16 z-20 text-right font-mono text-[13px] md:text-[14px] text-paper tracking-[0.14em] leading-[1.4] select-none">
+        <div className="absolute top-6 md:top-10 right-8 md:right-16 z-20 text-right font-mono text-[12px] md:text-[14px] text-paper tracking-[0.14em] leading-[1.4] select-none">
           <div>{project1.year}</div>
-          <div>{project1.role}</div>
+          <div className="hidden sm:block">{project1.role}</div>
         </div>
 
         {/* Bottom-Left: Project Title (Overlapping Image in Display Type ~14vw) */}
-        <div className="absolute bottom-8 md:bottom-12 left-8 md:left-12 z-20 max-w-[85vw] pointer-events-none select-none">
-          <h2 className="font-display font-black text-paper text-[clamp(64px,14vw,196px)] leading-[0.84] tracking-[-0.03em] uppercase">
+        <div className="absolute bottom-6 md:bottom-12 left-5 md:left-12 z-20 max-w-[85vw] pointer-events-none select-none">
+          <h2 className="font-display font-black text-paper text-[clamp(44px,12.5vw,196px)] leading-[0.84] tracking-[-0.03em] uppercase">
             {project1.title}
           </h2>
         </div>
 
         {/* Bottom-Right: "View project" Text Link */}
-        <div className="absolute bottom-10 md:bottom-14 right-14 md:right-16 z-20">
+        <div className="absolute bottom-6 md:bottom-14 right-8 md:right-16 z-20">
           <a
             href={`/work/${project1.slug}`}
-            className="font-mono text-[13px] md:text-[14px] tracking-[0.16em] uppercase text-paper hover:text-signal transition-colors duration-150 inline-block border-b-2 border-paper hover:border-signal pb-0.5 select-none"
+            className="font-mono text-[12px] md:text-[14px] tracking-[0.16em] uppercase text-paper hover:text-signal transition-colors duration-150 inline-block border-b-2 border-paper hover:border-signal pb-0.5 select-none"
           >
             VIEW PROJECT
           </a>
@@ -164,27 +169,36 @@ export function WorkPanels({ forcedFrame, className = "" }: WorkPanelsProps) {
           ========================================================================= */}
       {(isFrameB || (!isForced && projects.length > 1)) && (
         <div
-          className={`work-panel-layer absolute inset-0 w-full h-full z-20 ${
+          className={`work-panel-layer absolute inset-0 w-full h-full bg-ink ${
             isFrameB ? "" : "pointer-events-none"
           }`}
           style={{
+            backgroundColor: "#0E0E0E",
+            zIndex: 20,
             // Hard vertical straight edge, perfectly straight, no feather, no blur
             clipPath: isFrameB
               ? `inset(0% 0% 0% ${frameBSplitPercent}%)`
               : undefined,
           }}
         >
-          {/* Full-bleed high contrast project image 2 */}
+          {/* Full-bleed high contrast project image 2 with calibrated dark tone */}
           <img
             src={project2.heroImage}
             alt={project2.title}
-            className="absolute inset-0 w-full h-full object-cover grayscale contrast-125 brightness-95"
+            className="absolute inset-0 w-full h-full object-cover grayscale opacity-65"
+            style={{ filter: "grayscale(100%) contrast(120%) brightness(0.42)" }}
             loading="eager"
           />
+          {/* Dark ink overlay */}
+          <div className="absolute inset-0 bg-ink/45 pointer-events-none" aria-hidden="true" />
+          {/* Top scrim for metadata readability */}
+          <div className="absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-ink/90 via-ink/45 to-transparent pointer-events-none z-10" aria-hidden="true" />
+          {/* Bottom scrim for giant project title readability */}
+          <div className="absolute inset-x-0 bottom-0 h-56 bg-gradient-to-t from-ink/95 via-ink/60 to-transparent pointer-events-none z-10" aria-hidden="true" />
 
           {/* Top-Left: Numbering & Section Name for Panel 2 */}
-          <div className="absolute top-8 md:top-10 left-8 md:left-12 z-20">
-            <span className="font-mono text-[13px] md:text-[14px] tracking-[0.2em] text-paper uppercase select-none">
+          <div className="absolute top-6 md:top-10 left-5 md:left-12 z-20">
+            <span className="font-mono text-[12px] md:text-[14px] tracking-[0.16em] md:tracking-[0.2em] text-paper uppercase select-none">
               02 / 05 — SELECTED WORK
             </span>
           </div>
@@ -197,23 +211,23 @@ export function WorkPanels({ forcedFrame, className = "" }: WorkPanelsProps) {
           </div>
 
           {/* Top-Right: Year & Role for Panel 2 */}
-          <div className="absolute top-8 md:top-10 right-14 md:right-16 z-20 text-right font-mono text-[13px] md:text-[14px] text-paper tracking-[0.14em] leading-[1.4] select-none">
+          <div className="absolute top-6 md:top-10 right-8 md:right-16 z-20 text-right font-mono text-[12px] md:text-[14px] text-paper tracking-[0.14em] leading-[1.4] select-none">
             <div>{project2.year}</div>
-            <div>{project2.role}</div>
+            <div className="hidden sm:block">{project2.role}</div>
           </div>
 
           {/* Bottom-Left / Center: Project 2 Title visible in the split area */}
-          <div className="absolute bottom-8 md:bottom-12 left-8 md:left-12 z-20 max-w-[85vw] pointer-events-none select-none">
-            <h2 className="font-display font-black text-paper text-[clamp(64px,14vw,196px)] leading-[0.84] tracking-[-0.03em] uppercase">
+          <div className="absolute bottom-6 md:bottom-12 left-5 md:left-12 z-20 max-w-[85vw] pointer-events-none select-none">
+            <h2 className="font-display font-black text-paper text-[clamp(44px,12.5vw,196px)] leading-[0.84] tracking-[-0.03em] uppercase">
               {project2.title}
             </h2>
           </div>
 
           {/* Bottom-Right: "View project" for Panel 2 */}
-          <div className="absolute bottom-10 md:bottom-14 right-14 md:right-16 z-20">
+          <div className="absolute bottom-6 md:bottom-14 right-8 md:right-16 z-20">
             <a
               href={`/work/${project2.slug}`}
-              className="font-mono text-[13px] md:text-[14px] tracking-[0.16em] uppercase text-paper hover:text-signal transition-colors duration-150 inline-block border-b-2 border-paper hover:border-signal pb-0.5 select-none"
+              className="font-mono text-[12px] md:text-[14px] tracking-[0.16em] uppercase text-paper hover:text-signal transition-colors duration-150 inline-block border-b-2 border-paper hover:border-signal pb-0.5 select-none"
             >
               VIEW PROJECT
             </a>
@@ -230,20 +244,29 @@ export function WorkPanels({ forcedFrame, className = "" }: WorkPanelsProps) {
           return (
             <div
               key={project.id}
-              className="work-panel-layer absolute inset-0 w-full h-full z-20 pointer-events-none"
+              className="work-panel-layer absolute inset-0 w-full h-full bg-ink pointer-events-none"
               style={{
+                backgroundColor: "#0E0E0E",
+                zIndex: 30 + idx * 10,
                 clipPath: "inset(0% 0% 0% 100%)", // hidden initially
               }}
             >
               <img
                 src={project.heroImage}
                 alt={project.title}
-                className="absolute inset-0 w-full h-full object-cover grayscale contrast-125 brightness-95"
+                className="absolute inset-0 w-full h-full object-cover grayscale opacity-65"
+                style={{ filter: "grayscale(100%) contrast(120%) brightness(0.42)" }}
                 loading="lazy"
               />
+              {/* Dark ink overlay */}
+              <div className="absolute inset-0 bg-ink/45 pointer-events-none" aria-hidden="true" />
+              {/* Top scrim for metadata readability */}
+              <div className="absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-ink/90 via-ink/45 to-transparent pointer-events-none z-10" aria-hidden="true" />
+              {/* Bottom scrim for giant project title readability */}
+              <div className="absolute inset-x-0 bottom-0 h-56 bg-gradient-to-t from-ink/95 via-ink/60 to-transparent pointer-events-none z-10" aria-hidden="true" />
 
-              <div className="absolute top-8 md:top-10 left-8 md:left-12 z-20">
-                <span className="font-mono text-[13px] md:text-[14px] tracking-[0.2em] text-paper uppercase select-none">
+              <div className="absolute top-6 md:top-10 left-5 md:left-12 z-20">
+                <span className="font-mono text-[12px] md:text-[14px] tracking-[0.16em] md:tracking-[0.2em] text-paper uppercase select-none">
                   0{panelNum} / 05 — SELECTED WORK
                 </span>
               </div>
@@ -254,21 +277,21 @@ export function WorkPanels({ forcedFrame, className = "" }: WorkPanelsProps) {
                 </span>
               </div>
 
-              <div className="absolute top-8 md:top-10 right-14 md:right-16 z-20 text-right font-mono text-[13px] md:text-[14px] text-paper tracking-[0.14em] leading-[1.4] select-none">
+              <div className="absolute top-6 md:top-10 right-8 md:right-16 z-20 text-right font-mono text-[12px] md:text-[14px] text-paper tracking-[0.14em] leading-[1.4] select-none">
                 <div>{project.year}</div>
-                <div>{project.role}</div>
+                <div className="hidden sm:block">{project.role}</div>
               </div>
 
-              <div className="absolute bottom-8 md:bottom-12 left-8 md:left-12 z-20 max-w-[85vw] pointer-events-none select-none">
-                <h2 className="font-display font-black text-paper text-[clamp(64px,14vw,196px)] leading-[0.84] tracking-[-0.03em] uppercase">
+              <div className="absolute bottom-6 md:bottom-12 left-5 md:left-12 z-20 max-w-[85vw] pointer-events-none select-none">
+                <h2 className="font-display font-black text-paper text-[clamp(44px,12.5vw,196px)] leading-[0.84] tracking-[-0.03em] uppercase">
                   {project.title}
                 </h2>
               </div>
 
-              <div className="absolute bottom-10 md:bottom-14 right-14 md:right-16 z-20">
+              <div className="absolute bottom-6 md:bottom-14 right-8 md:right-16 z-20">
                 <a
                   href={`/work/${project.slug}`}
-                  className="font-mono text-[13px] md:text-[14px] tracking-[0.16em] uppercase text-paper hover:text-signal transition-colors duration-150 inline-block border-b-2 border-paper hover:border-signal pb-0.5 select-none"
+                  className="font-mono text-[12px] md:text-[14px] tracking-[0.16em] uppercase text-paper hover:text-signal transition-colors duration-150 inline-block border-b-2 border-paper hover:border-signal pb-0.5 select-none"
                 >
                   VIEW PROJECT
                 </a>
@@ -281,7 +304,7 @@ export function WorkPanels({ forcedFrame, className = "" }: WorkPanelsProps) {
           RIGHT EDGE: THIN VERTICAL PROGRESS BAR OF 5 SEGMENTS
           ========================================================================= */}
       <div
-        className="absolute right-5 md:right-8 top-1/2 -translate-y-1/2 flex flex-col gap-2 z-40 select-none"
+        className="absolute right-2 md:right-8 top-1/2 -translate-y-1/2 flex flex-col gap-2 z-[60] select-none"
         aria-label="Project slide indicator"
       >
         {[0, 1, 2, 3, 4].map((segIndex) => {

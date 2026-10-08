@@ -37,40 +37,40 @@ export const personalInfo: PersonalInfo = {
   positioning:
     "Software engineer specializing in high-performance web applications, scalable backend architectures, intelligent recommendation systems, and open-source developer tooling.",
   statement: {
-    lead: "I BUILD SYSTEMS LIKE I TUNE HARDWARE:",
-    keyword: "RELENTLESS",
+    lead: "I'm a",
+    keyword: "software engineer",
     revealed:
-      "ABOUT LATENCY, UNCOMPROMISING ON PRECISION. WHETHER SCALING RECOMMENDATION ENGINES IN NODE OR INSPECTING MONGOOSE QUERIES AT MIDNIGHT,",
+      "in Yogyakarta. I work across the stack: React and Next.js up front, Node and Postgres behind it, Python when the problem is data.",
     dimmed:
-      "I CRAFT RESILIENT BACKENDS THAT NEVER CRUMBLE UNDER LOAD AND MAKE COMPLEX ARCHITECTURES LOOK EFFORTLESS.",
+      "I like projects where I get to see the whole thing work, from the button to the database.",
     unrevealed:
-      "I CRAFT RESILIENT BACKENDS THAT NEVER CRUMBLE UNDER LOAD AND MAKE COMPLEX ARCHITECTURES LOOK EFFORTLESS.",
-    full: "I BUILD SYSTEMS LIKE I TUNE HARDWARE: RELENTLESS ABOUT LATENCY, UNCOMPROMISING ON PRECISION. WHETHER SCALING RECOMMENDATION ENGINES IN NODE OR INSPECTING MONGOOSE QUERIES AT MIDNIGHT, I CRAFT RESILIENT BACKENDS THAT NEVER CRUMBLE UNDER LOAD AND MAKE COMPLEX ARCHITECTURES LOOK EFFORTLESS.",
+      "I like projects where I get to see the whole thing work, from the button to the database.",
+    full: "I'm a software engineer in Yogyakarta. I work across the stack: React and Next.js up front, Node and Postgres behind it, Python when the problem is data. I like projects where I get to see the whole thing work, from the button to the database.",
   },
   bio: [
-    "Software engineer and fullstack developer focused on low-latency web backends, intelligent recommendation systems, and developer productivity tooling.",
-    "Creator of open-source projects including nano-recommender and Mongoosleuth, with extensive production experience in high-performance web architectures.",
+    "Software engineer and fullstack developer focusing on low-latency web backends, intelligent recommendation systems, and developer productivity tooling.",
+    "Creator of open-source projects including nano-recommender and Mongoosleuth, with comprehensive production experience across high-performance web architectures.",
   ],
   facts: [
     {
       title: "Precision Craft",
       detail:
-        "Assembles Real Grade and Master Grade Gunpla kits, including the MG Freedom 2.0 and MG Hi-ν Gundam.",
+        "Building Real Grade and Master Grade Gunpla model kits, including MG Freedom 2.0 and MG Hi-ν Gundam.",
     },
     {
       title: "Daily Transit",
       detail:
-        "Maintains a regular 7 km round-trip walking routine between residence and Tugu Yogyakarta.",
+        "Walking a regular 7 km round-trip loop between home and Tugu Yogyakarta.",
     },
     {
       title: "Manual Extraction",
       detail:
-        "Enjoys manual pour-over coffee (V60), particularly exploring flavor profiles of Temanggung Arabica and Pati Petik Merah beans.",
+        "Brewing manual pour-over coffee (V60), dialing in single-origin Temanggung Arabica and Pati Petik Merah roast profiles.",
     },
     {
       title: "Acoustic Tuning",
       detail:
-        "In-Ear Monitor (IEM) enthusiast who tunes custom parametric sound profiles via Equalizer APO.",
+        "In-Ear Monitor enthusiast dialing in custom parametric EQ profiles via Equalizer APO.",
     },
   ],
 };
@@ -82,8 +82,10 @@ export interface BeyondPhoto {
   caption: string;
 }
 
-export interface BeyondBlock {
+export interface BeyondChapter {
+  id: string;
   title: string;
+  subtitle?: string;
   paragraph: string;
 }
 
@@ -94,9 +96,15 @@ export interface RightNowItem {
 
 export interface BeyondContent {
   title: string;
-  hobbies: string[];
-  photos: BeyondPhoto[];
-  blocks: BeyondBlock[];
+  subtitle: string;
+  photos: {
+    gunpla: BeyondPhoto;
+    tugu: BeyondPhoto;
+    desk: BeyondPhoto;
+    coffee: BeyondPhoto;
+    iem: BeyondPhoto;
+  };
+  chapters: BeyondChapter[];
   rightNow: {
     title: string;
     items: RightNowItem[];
@@ -105,62 +113,65 @@ export interface BeyondContent {
 
 export const beyondContent: BeyondContent = {
   title: "Beyond the work",
-  hobbies: ["GUNPLA", "YOGYAKARTA WALKS", "MANUAL POUR-OVER", "IEM TUNING"],
-  photos: [
-    {
-      id: "photo-1",
+  subtitle: "What I do when the laptop is closed.",
+  photos: {
+    gunpla: {
+      id: "photo-gunpla",
       src: "/personal/gunpla.jpg",
-      alt: "Gunpla cutting bench with mechanical kit pieces and precision nippers",
-      caption: "Gunpla bench, Saturday mornings.",
+      alt: "Gunpla cutting bench with mechanical kit parts and precision nippers",
+      caption: "Gunpla cutting bench on Saturday mornings.",
     },
-    {
-      id: "photo-2",
+    tugu: {
+      id: "photo-tugu",
       src: "/personal/tugu.jpg",
       alt: "Night walk pathway past Tugu Yogyakarta landmark",
-      caption: "Night walk past Tugu, 7 km loop.",
+      caption: "Late night walk past Tugu, 7 km loop.",
     },
-    {
-      id: "photo-3",
+    desk: {
+      id: "photo-desk",
+      src: "/personal/desk.jpg",
+      alt: "Minimalist workspace desk with custom 68-key mechanical keyboard and drafting tools",
+      caption: "Work desk and 68-key custom board.",
+    },
+    coffee: {
+      id: "photo-coffee",
       src: "/personal/coffee.jpg",
-      alt: "Hand pour-over coffee dripper brewing single-origin coffee",
+      alt: "Manual pour-over coffee dripper extracting single-origin beans",
       caption: "Morning pour-over, Temanggung natural.",
     },
-    {
-      id: "photo-4",
+    iem: {
+      id: "photo-iem",
       src: "/personal/iem.jpg",
-      alt: "Custom braided IEM audio cable and machined brass acoustic nozzles",
+      alt: "Braided custom audio IEM cable and machined brass acoustic nozzles",
       caption: "Braided IEM cable and brass nozzles.",
     },
+  },
+  chapters: [
     {
-      id: "photo-5",
-      src: "/personal/desk.jpg",
-      alt: "Minimalist drafting desk with custom 68-key mechanical keyboard and drafting tools",
-      caption: "Drafting desk and 68-key board.",
-    },
-  ],
-  blocks: [
-    {
-      title: "PRECISION CRAFT",
+      id: "chapter-gunpla",
+      title: "GUNPLA",
       paragraph:
-        "Precision mechanical modeling is my reset. When stepping away from codebases, I assemble Real Grade and Master Grade Gunpla kits—including the MG Freedom 2.0 and MG Hi-ν Gundam—spending forty hours calibrating joint tolerances and surface finishes.",
+        "Precision mechanical modeling is how I reset between coding sessions. I assemble Real Grade and Master Grade Gunpla kits, calibrating joint tolerances and surface finishes.",
     },
     {
-      title: "DAILY TRANSIT",
+      id: "chapter-tugu",
+      title: "WALKING TO TUGU",
       paragraph:
-        "Yogyakarta keeps my thinking grounded. A regular seven-kilometer round-trip walking routine between my residence and Tugu Yogyakarta clears out architectural bottlenecks before they ever reach production.",
+        "Yogyakarta keeps my head clear every evening. A routine seven-kilometer round-trip walk to Tugu unwinds complex architectural knots before shipping to production.",
     },
     {
-      title: "ACOUSTICS & EXTRACTION",
+      id: "chapter-coffee-iem",
+      title: "COFFEE & IEMS",
       paragraph:
-        "Dialing in nuance: brewing manual V60 pour-overs with Temanggung Arabica and Pati Petik Merah beans, while tuning custom parametric EQ sound profiles via Equalizer APO for high-resolution IEM listening sessions.",
+        "Dialing in nuances through manual pour-overs and acoustic tuning. Savoring Temanggung beans while tuning high-resolution audio profiles in Equalizer APO.",
     },
   ],
   rightNow: {
     title: "RIGHT NOW",
     items: [
       { label: "Brewing", value: "Temanggung Arabica & Pati Petik Merah" },
-      { label: "Listening", value: "Custom IEM profile via Equalizer APO" },
-      { label: "Building", value: "MG Hi-ν Gundam armor assembly" },
+      { label: "Listening", value: "Custom IEM profiles via Equalizer APO" },
+      { label: "Building", value: "MG Hi-ν Gundam outer armor assembly" },
     ],
   },
 };

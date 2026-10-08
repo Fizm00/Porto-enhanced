@@ -1,7 +1,9 @@
 import { Nav } from "../layout/Nav.tsx";
 import { personalInfo } from "../../content/personal.ts";
 import { SylvaLivingWorldScene } from "../../shaders/sylva-living-world/SylvaLivingWorldScene.tsx";
+import { LiquidReveal } from "../ui/LiquidReveal.tsx";
 import faceheroImage from "../../assets/facehero.png";
+import facehero3Image from "../../assets/facehero3.png";
 
 export interface HeroProps {
   onMenuClick?: () => void;
@@ -13,26 +15,17 @@ export function Hero({ onMenuClick }: HeroProps) {
 
   return (
     <section className="bg-paper text-ink relative flex flex-col justify-between min-h-screen w-full select-none overflow-hidden">
-      {/* BACKGROUND IMAGE (z-0): Editorial studio portrait (Prominent right-side presence, calibrated scale & position) */}
-      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden select-none">
-        <img
-          src={faceheroImage}
-          alt=""
-          aria-hidden="true"
-          className="w-full h-full object-cover object-[82%_33%] mix-blend-multiply opacity-95 select-none"
-          style={{
-            transformOrigin: "85% 33%",
-            transform: "scale(0.88) translateX(4.5%)",
-          }}
-          loading="eager"
-        />
-      </div>
+      {/* LIQUID REVEAL FULL-BLEED BACKGROUND (z-0) */}
+      <LiquidReveal
+        beforeSrc={faceheroImage}
+        afterSrc={facehero3Image}
+      />
 
-      {/* LAYER 1 (z-10): LAST NAME "HIMAWAN" (Placed BEHIND the 3D tree scene) */}
+      {/* LAYER 1 (z-10): LAST NAME "HIMAWAN" (Placed BEHIND falling leaves, vibrant signal orange) */}
       <div className="absolute inset-0 flex flex-col justify-center items-start px-5 md:px-10 overflow-hidden w-full z-10 pointer-events-none">
         {/* Invisible spacer for Line 1 (FIRZA) */}
         <div className="w-full flex justify-start items-center opacity-0 select-none" aria-hidden="true">
-          <span className="giant-title font-display flex gap-[clamp(8px,1.8vw,28px)]">
+          <span className="giant-title font-display flex gap-[clamp(2px,0.6vw,12px)]">
             {firstNameLetters.map((char, index) => (
               <span key={`spacer-first-${index}`}>{char}</span>
             ))}
@@ -43,7 +36,7 @@ export function Hero({ onMenuClick }: HeroProps) {
         <div className="w-full flex justify-start items-center">
           <div
             aria-hidden="true"
-            className="giant-title font-display text-ink flex gap-[clamp(8px,1.8vw,28px)] select-none"
+            className="giant-title font-display text-signal flex gap-[clamp(2px,0.6vw,12px)] select-none"
           >
             {lastNameLetters.map((char, index) => (
               <span key={`last-${index}`}>{char}</span>
@@ -52,11 +45,12 @@ export function Hero({ onMenuClick }: HeroProps) {
         </div>
       </div>
 
-      {/* LAYER 2 (z-20): THREEUI SYLVA LIVING WORLD 3D SCENE (Transparent background, Maple Autumn) */}
-      <div className="absolute inset-0 w-full h-full z-20 overflow-hidden pointer-events-auto">
+      {/* LAYER 2 (z-20): THREEUI SYLVA LIVING WORLD 3D SCENE (Falling maple leaves only) */}
+      <div className="absolute inset-0 w-full h-full z-20 overflow-hidden pointer-events-none">
         <SylvaLivingWorldScene
           variant="maple-autumn"
           transparentBg={true}
+          leavesOnly={true}
           className="w-full h-full"
         />
       </div>
@@ -70,7 +64,7 @@ export function Hero({ onMenuClick }: HeroProps) {
       <div className="relative flex-1 flex flex-col justify-center items-start px-5 md:px-10 overflow-hidden w-full z-30 pointer-events-none">
         {/* LINE 1: FIRST NAME (FIRZA) */}
         <div className="w-full flex justify-start items-center">
-          <h1 className="giant-title font-display text-ink flex gap-[clamp(8px,1.8vw,28px)] select-none">
+          <h1 className="giant-title font-display text-ink flex gap-[clamp(2px,0.6vw,12px)] select-none">
             {firstNameLetters.map((char, index) => (
               <span key={`first-${index}`}>{char}</span>
             ))}
@@ -79,7 +73,7 @@ export function Hero({ onMenuClick }: HeroProps) {
 
         {/* Invisible spacer for Line 2 (HIMAWAN) */}
         <div className="w-full flex justify-start items-center opacity-0 select-none" aria-hidden="true">
-          <span className="giant-title font-display flex gap-[clamp(8px,1.8vw,28px)]">
+          <span className="giant-title font-display flex gap-[clamp(2px,0.6vw,12px)]">
             {lastNameLetters.map((char, index) => (
               <span key={`spacer-last-${index}`}>{char}</span>
             ))}
@@ -87,11 +81,11 @@ export function Hero({ onMenuClick }: HeroProps) {
         </div>
       </div>
 
-      {/* BOTTOM ROW WITH PAPER GROUND SHIELD FOR 100% CONTRAST */}
-      <footer className="w-full px-5 md:px-10 pb-8 pt-16 md:pt-28 grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-0 items-end z-40 relative pointer-events-auto bg-gradient-to-t from-paper via-paper/95 via-60% to-transparent text-ink">
+      {/* BOTTOM ROW: Positioning, Scroll, Location & Availability */}
+      <footer className="w-full px-5 md:px-10 pb-8 pt-6 md:pt-8 grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-0 items-end z-40 relative pointer-events-auto text-ink">
         {/* Left: Positioning (max 4 columns) */}
         <div className="col-span-1 md:col-span-5 pr-0 md:pr-6">
-          <p className="font-body text-[17px] sm:text-[19px] md:text-[22px] leading-[1.35] text-ink font-normal tracking-tight max-w-[500px]">
+          <p className="font-body text-[15px] sm:text-[18px] md:text-[22px] leading-[1.38] text-ink font-normal tracking-tight max-w-[500px]">
             {personalInfo.positioning}
           </p>
         </div>
@@ -105,7 +99,7 @@ export function Hero({ onMenuClick }: HeroProps) {
         </div>
 
         {/* Right: Location & Availability (2 lines in DM Mono) */}
-        <div className="col-span-1 md:col-span-5 flex flex-row md:flex-col justify-between md:justify-end items-end text-right font-mono text-[14px] leading-relaxed text-ink">
+        <div className="col-span-1 md:col-span-5 flex flex-col sm:flex-row md:flex-col justify-between md:justify-end items-start sm:items-end text-left sm:text-right font-mono text-[13px] sm:text-[14px] leading-relaxed text-ink gap-0.5 sm:gap-0">
           <span>Based in {personalInfo.location}</span>
           <span>{personalInfo.availability}</span>
         </div>

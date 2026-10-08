@@ -54,38 +54,39 @@ export function WorkIndex({
               const isHovered = hoveredIndex === index;
 
               return (
-                <article
+                <a
                   key={project.id}
+                  href={`/work/${project.slug}`}
                   onMouseEnter={() => setHoveredIndex(index)}
                   onMouseLeave={() => setHoveredIndex(defaultHovered)}
-                  className="relative w-full h-[170px] border-b border-ink flex items-center overflow-hidden cursor-pointer transition-colors duration-150"
+                  className="relative block w-full h-[120px] sm:h-[145px] md:h-[170px] border-b border-ink overflow-hidden cursor-pointer transition-colors duration-150"
                   style={{
                     backgroundColor: isHovered ? "transparent" : "#F2EFE8",
                   }}
                 >
-                  {/* HOVERED STATE BACKGROUND IMAGE (Letterbox crop, flat 35% ink overlay) */}
+                  {/* HOVERED STATE BACKGROUND IMAGE (Letterbox crop, calibrated dark ink overlay) */}
                   {isHovered && (
-                    <div className="absolute inset-0 w-full h-full z-0 overflow-hidden pointer-events-none">
+                    <div className="absolute inset-0 w-full h-full z-0 overflow-hidden pointer-events-none bg-ink">
                       <img
                         src={project.heroImage}
                         alt={project.title}
-                        className="w-full h-full object-cover grayscale contrast-125 brightness-95"
+                        className="w-full h-full object-cover grayscale opacity-65"
+                        style={{ filter: "grayscale(100%) contrast(120%) brightness(0.42)" }}
                       />
-                      {/* Flat 35% ink overlay (#0E0E0E at 35% opacity) */}
+                      {/* Dark ink overlay */}
                       <div
-                        className="absolute inset-0"
-                        style={{ backgroundColor: "rgba(14, 14, 14, 0.35)" }}
+                        className="absolute inset-0 bg-ink/50"
                         aria-hidden="true"
                       />
                     </div>
                   )}
 
                   {/* ROW CONTENT CONTAINER */}
-                  <div className="relative z-10 w-full flex items-center justify-between px-2 md:px-4 pointer-events-none">
+                  <div className="relative z-10 w-full h-full flex items-center justify-between px-2 md:px-4 pointer-events-none">
                     {/* LEFT: Project Number & 12px Signal Square */}
-                    <div className="flex items-center gap-3 w-[60px] md:w-[80px] shrink-0">
+                    <div className="flex items-center gap-2 sm:gap-3 w-[40px] sm:w-[60px] md:w-[80px] shrink-0">
                       <span
-                        className={`font-mono text-[14px] md:text-[15px] font-normal transition-colors duration-150 ${
+                        className={`font-mono text-[13px] sm:text-[14px] md:text-[15px] font-normal transition-colors duration-150 ${
                           isHovered ? "text-paper" : "text-ink"
                         }`}
                       >
@@ -94,7 +95,7 @@ export function WorkIndex({
                       {/* Exact 12px Signal Square (#FF4A1C) */}
                       {isHovered && (
                         <div
-                          className="w-[12px] h-[12px] shrink-0"
+                          className="w-[10px] sm:w-[12px] h-[10px] sm:h-[12px] shrink-0"
                           style={{ backgroundColor: "#FF4A1C" }}
                           aria-hidden="true"
                         />
@@ -102,9 +103,9 @@ export function WorkIndex({
                     </div>
 
                     {/* CENTER-LEFT: Project Title in Headline-XL */}
-                    <div className="flex-1 pr-6 overflow-hidden">
+                    <div className="flex-1 pr-3 sm:pr-6 overflow-hidden">
                       <h2
-                        className={`font-display font-black text-5xl sm:text-6xl md:text-7xl lg:text-[76px] leading-[0.84] tracking-[-0.03em] uppercase transition-colors duration-150 whitespace-pre-line ${
+                        className={`font-display font-black text-[28px] sm:text-5xl md:text-6xl lg:text-[76px] leading-[0.84] tracking-[-0.03em] uppercase transition-colors duration-150 whitespace-pre-line break-words ${
                           isHovered ? "text-paper" : "text-ink"
                         }`}
                       >
@@ -113,10 +114,10 @@ export function WorkIndex({
                     </div>
 
                     {/* RIGHT: Discipline & Year */}
-                    <div className="flex items-center justify-end gap-8 md:gap-16 shrink-0 text-right font-mono text-[13px] md:text-[14px]">
-                      {/* Short Discipline in sentence case */}
+                    <div className="flex items-center justify-end gap-3 sm:gap-8 md:gap-16 shrink-0 text-right font-mono text-[12px] sm:text-[13px] md:text-[14px]">
+                      {/* Short Discipline in sentence case (hidden on small mobile screens to prevent cramming) */}
                       <span
-                        className={`transition-colors duration-150 ${
+                        className={`hidden sm:inline transition-colors duration-150 ${
                           isHovered ? "text-paper" : "text-stone"
                         }`}
                       >
@@ -124,7 +125,7 @@ export function WorkIndex({
                       </span>
                       {/* Year */}
                       <span
-                        className={`w-[48px] text-right transition-colors duration-150 ${
+                        className={`w-auto sm:w-[48px] text-right transition-colors duration-150 ${
                           isHovered ? "text-paper" : "text-ink"
                         }`}
                       >
@@ -132,7 +133,7 @@ export function WorkIndex({
                       </span>
                     </div>
                   </div>
-                </article>
+                </a>
               );
             })}
           </div>
@@ -143,14 +144,14 @@ export function WorkIndex({
           {/* Column 1: Infrastructure Statement */}
           <div className="col-span-1 md:col-span-5 pr-0 md:pr-4">
             <p className="font-body text-[15px] sm:text-[16px] leading-[1.4] text-ink font-normal tracking-tight max-w-[420px]">
-              High-throughput software infrastructure, algorithmic engines, and distributed memory architectures built for zero-drift performance.
+              High-velocity software infrastructure, algorithmic engines, and distributed in-memory systems engineered for low-overhead performance.
             </p>
           </div>
 
           {/* Column 2: Availability / Advisory Statement */}
           <div className="col-span-1 md:col-span-5 pr-0 md:pr-4">
             <p className="font-body text-[15px] sm:text-[16px] leading-[1.4] text-ink font-normal tracking-tight max-w-[340px]">
-              Advisory and principal systems architecture roles for Q2 2026 onwards.
+              Systems architecture and technical advisory engagements considered for Q2 2026 onward.
             </p>
           </div>
 
@@ -168,7 +169,7 @@ export function WorkIndex({
 
       {/* FOOTER BAR */}
       <footer className="w-full px-5 md:px-10 py-4 border-t border-ink flex justify-between items-center font-mono text-[12px] md:text-[13px] text-ink select-none">
-        <div>Firza Himawan 2025</div>
+        <div>Firza Himawan 2026</div>
         <div>Editorial design & art direction</div>
       </footer>
     </section>

@@ -41,14 +41,22 @@ export function Statement({ frame, headingTag = "h2" }: StatementProps) {
 
   // Derive all words in exact sequential order from personalInfo.statement
   const allStatementWords = useMemo<StatementWord[]>(() => {
-    const leadWords = personalInfo.statement.lead.trim().split(/\s+/);
-    const keyword = personalInfo.statement.keyword;
-    const revealedWords = personalInfo.statement.revealed.trim().split(/\s+/);
-    const unrevealedWords = personalInfo.statement.unrevealed.trim().split(/\s+/);
+    const leadWords = personalInfo.statement.lead
+      ? personalInfo.statement.lead.trim().split(/\s+/).filter(Boolean)
+      : [];
+    const keywordWords = personalInfo.statement.keyword
+      ? personalInfo.statement.keyword.trim().split(/\s+/).filter(Boolean)
+      : [];
+    const revealedWords = personalInfo.statement.revealed
+      ? personalInfo.statement.revealed.trim().split(/\s+/).filter(Boolean)
+      : [];
+    const unrevealedWords = personalInfo.statement.unrevealed
+      ? personalInfo.statement.unrevealed.trim().split(/\s+/).filter(Boolean)
+      : [];
 
     return [
       ...leadWords.map((w, i) => ({ id: `lead-${i}`, text: w, isInitial: true })),
-      { id: "kw", text: keyword, isKeyword: true, isInitial: true },
+      ...keywordWords.map((w, i) => ({ id: `kw-${i}`, text: w, isKeyword: true, isInitial: true })),
       ...revealedWords.map((w, i) => ({ id: `rev-${i}`, text: w, isInitial: true })),
       ...unrevealedWords.map((w, i) => ({ id: `unrev-${i}`, text: w, isInitial: false })),
     ];

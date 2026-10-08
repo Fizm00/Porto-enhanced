@@ -10,6 +10,7 @@ export interface SiteConfig {
   description: string;
   location: string;
   coordinates: string;
+  availability: string;
   year: number;
   navLinks: NavLink[];
   socialLinks: {
@@ -17,6 +18,7 @@ export interface SiteConfig {
     twitter: string;
     linkedin: string;
     instagram: string;
+    whatsapp: string;
   };
 }
 
@@ -28,6 +30,7 @@ export const siteConfig: SiteConfig = {
     "Software engineer specializing in high-performance web applications, scalable backend architectures, intelligent recommendation systems, and open-source developer tooling.",
   location: "Yogyakarta",
   coordinates: "-7.7956° S, 110.3695° E",
+  availability: "I'm taking on one new project from July.",
   year: 2026,
   navLinks: [
     { label: "About", href: "#about" },
@@ -39,5 +42,6 @@ export const siteConfig: SiteConfig = {
     twitter: "https://erdamotor.id",
     linkedin: "https://linkedin.com/in/firzahimawan",
     instagram: "https://erdamotor.id",
+    whatsapp: "https://wa.me/6281320732375",
   },
 };

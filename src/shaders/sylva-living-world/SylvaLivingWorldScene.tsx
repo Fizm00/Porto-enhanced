@@ -11,6 +11,7 @@ export type SylvaLivingWorldSceneProps = {
   className?: string;
   style?: CSSProperties;
   transparentBg?: boolean;
+  leavesOnly?: boolean;
 };
 
 const SCENE_ONLY_MARKUP = (label: string) => `<main class="hero" id="hero">
@@ -1494,7 +1495,12 @@ export function applyMapleAutumnVariant(source: string) {
   );
 }
 
-function buildSceneDocument(reducedMotion: boolean, variant: SylvaLivingWorldVariant, transparentBg = false) {
+function buildSceneDocument(
+  reducedMotion: boolean,
+  variant: SylvaLivingWorldVariant,
+  transparentBg = false,
+  leavesOnly = false,
+) {
   const presentationStart = innerGreenSource.indexOf('<main class="hero" id="hero">');
   const runtimeStart = innerGreenSource.indexOf('<script src="inner-green-assets/three.min.js"></script>');
 
@@ -1521,6 +1527,14 @@ function buildSceneDocument(reducedMotion: boolean, variant: SylvaLivingWorldVar
     );
   }
 
+  if (leavesOnly) {
+    documentSource = documentSource
+      .replace("scene.add(nearGroup);", "scene.add(nearGroup); nearGroup.visible = false;")
+      .replace("scene.add(farGroup);", "scene.add(farGroup); farGroup.visible = false;")
+      .replace("scene.add(shadowMesh);", "scene.add(shadowMesh); shadowMesh.visible = false;")
+      .replace("scene.add(glowMesh);", "scene.add(glowMesh); glowMesh.visible = false;");
+  }
+
   if (transparentBg) {
     documentSource = documentSource.replace(
       "</head>",
@@ -1536,6 +1550,7 @@ export function SylvaLivingWorldScene({
   className = "",
   style,
   transparentBg = false,
+  leavesOnly = false,
 }: SylvaLivingWorldSceneProps) {
   const safeVariant = SYLVA_LIVING_WORLD_VARIANTS.includes(variant) ? variant : "living-green";
   const hostRef = useRef<HTMLDivElement>(null);
@@ -1552,7 +1567,10 @@ export function SylvaLivingWorldScene({
     return () => media.removeEventListener("change", update);
   }, []);
 
-  const source = useMemo(() => buildSceneDocument(reducedMotion, safeVariant, transparentBg), [reducedMotion, safeVariant, transparentBg]);
+  const source = useMemo(
+    () => buildSceneDocument(reducedMotion, safeVariant, transparentBg, leavesOnly),
+    [reducedMotion, safeVariant, transparentBg, leavesOnly],
+  );
   const label = VARIANT_LABELS[safeVariant];
   const background = transparentBg ? "transparent" : VARIANT_BACKGROUNDS[safeVariant];
 
@@ -1564,7 +1582,11 @@ export function SylvaLivingWorldScene({
       aria-label={`${label} with ferns, flowers, pollen, and a butterfly`}
       data-variant={safeVariant}
       data-state={ready ? "ready" : "loading"}
-      style={{ background, pointerEvents: "auto", ...style }}
+      style={{
+        background,
+        pointerEvents: leavesOnly ? "none" : (style?.pointerEvents ?? "auto"),
+        ...style,
+      }}
     >
       <iframe
         key={`${safeVariant}-${reducedMotion ? "reduced" : "motion"}`}
@@ -1581,6 +1603,7 @@ export function SylvaLivingWorldScene({
           height: "100%",
           border: 0,
           background,
+          pointerEvents: leavesOnly ? "none" : (style?.pointerEvents ?? "auto"),
         }}
       />
     </div>
