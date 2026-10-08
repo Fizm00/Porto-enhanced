@@ -94,8 +94,10 @@ export function LiquidReveal({
       } else {
         drawH = coverCanvas.height;
         drawW = coverCanvas.height * imgRatio;
-        drawX = (coverCanvas.width - drawW) / 2;
-        drawY = 0;
+        const alignX = coverCanvas.width < 768 ? 0.62 : (coverCanvas.width < 1024 ? 0.7 : 0.5);
+        const alignY = coverCanvas.width < 768 ? 0.25 : 0.5;
+        drawX = (coverCanvas.width - drawW) * alignX;
+        drawY = (coverCanvas.height - drawH) * alignY;
       }
 
       coverCtx.clearRect(0, 0, coverCanvas.width, coverCanvas.height);
@@ -268,7 +270,7 @@ export function LiquidReveal({
         alt=""
         aria-hidden="true"
         loading="eager"
-        className="absolute inset-0 w-full h-full object-cover"
+        className="hero-portrait-bg absolute inset-0 w-full h-full object-cover object-[62%_25%] md:object-right lg:object-center"
         style={{
           position: "absolute",
           inset: 0,

@@ -45,8 +45,8 @@ export function Hero({ onMenuClick }: HeroProps) {
         </div>
       </div>
 
-      {/* LAYER 2 (z-20): THREEUI SYLVA LIVING WORLD 3D SCENE (Falling maple leaves only) */}
-      <div className="absolute inset-0 w-full h-full z-20 overflow-hidden pointer-events-none">
+      {/* LAYER 2 (z-20): THREEUI SYLVA LIVING WORLD 3D SCENE (Falling maple leaves drift below navbar) */}
+      <div className="absolute inset-x-0 bottom-0 top-14 w-full z-20 overflow-hidden pointer-events-none">
         <SylvaLivingWorldScene
           variant="maple-autumn"
           transparentBg={true}
@@ -81,8 +81,14 @@ export function Hero({ onMenuClick }: HeroProps) {
         </div>
       </div>
 
-      {/* BOTTOM ROW: Positioning, Scroll, Location & Availability */}
-      <footer className="w-full px-5 md:px-10 pb-8 pt-6 md:pt-8 grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-0 items-end z-40 relative pointer-events-auto text-ink">
+      {/* SOFT CONTRAST SCRIM (z-30): Guarantees text never clashes with portrait clothing */}
+      <div
+        className="absolute inset-x-0 bottom-0 h-52 sm:h-40 bg-gradient-to-t from-paper via-paper/90 via-55% to-transparent pointer-events-none z-30"
+        aria-hidden="true"
+      />
+
+      {/* BOTTOM ROW: Positioning, Scroll, Location & Availability (z-40) */}
+      <footer className="w-full px-5 md:px-10 pb-8 pt-4 md:pt-8 grid grid-cols-1 md:grid-cols-12 gap-3 md:gap-0 items-end z-40 relative pointer-events-auto text-ink">
         {/* Left: Positioning (max 4 columns) */}
         <div className="col-span-1 md:col-span-5 pr-0 md:pr-6">
           <p className="font-body text-[15px] sm:text-[18px] md:text-[22px] leading-[1.38] text-ink font-normal tracking-tight max-w-[500px]">
@@ -90,7 +96,7 @@ export function Hero({ onMenuClick }: HeroProps) {
           </p>
         </div>
 
-        {/* Center: Scroll + 40px line */}
+        {/* Center: Scroll + 40px line (Desktop only) */}
         <div className="hidden md:flex col-span-2 flex-col items-center justify-end pb-1">
           <span className="font-mono text-[14px] text-ink uppercase tracking-wider mb-2">
             Scroll
@@ -98,19 +104,19 @@ export function Hero({ onMenuClick }: HeroProps) {
           <div className="w-[1px] h-[40px] bg-ink"></div>
         </div>
 
-        {/* Right: Location & Availability (2 lines in DM Mono) */}
-        <div className="col-span-1 md:col-span-5 flex flex-col sm:flex-row md:flex-col justify-between md:justify-end items-start sm:items-end text-left sm:text-right font-mono text-[13px] sm:text-[14px] leading-relaxed text-ink gap-0.5 sm:gap-0">
-          <span>Based in {personalInfo.location}</span>
-          <span>{personalInfo.availability}</span>
-        </div>
+        {/* Right: Location & Availability + Mobile Scroll (Side-by-side on mobile, right-aligned on desktop) */}
+        <div className="col-span-1 md:col-span-5 flex flex-row md:flex-col justify-between md:justify-end items-end text-left md:text-right font-mono text-[13px] sm:text-[14px] leading-relaxed text-ink pt-2 md:pt-0">
+          <div className="flex flex-col text-left md:text-right gap-0.5">
+            <span>Based in {personalInfo.location}</span>
+            <span>{personalInfo.availability}</span>
+          </div>
 
-        {/* Mobile-only Scroll */}
-        <div className="flex md:hidden col-span-1 justify-center items-center pt-2">
-          <div className="flex flex-col items-center">
-            <span className="font-mono text-[11px] text-ink uppercase tracking-wider mb-1.5">
+          {/* Mobile-only Scroll cleanly aligned to the right of location info */}
+          <div className="flex md:hidden flex-col items-center pl-4 shrink-0">
+            <span className="font-mono text-[11px] text-ink uppercase tracking-wider mb-1">
               Scroll
             </span>
-            <div className="w-[1px] h-[32px] bg-ink"></div>
+            <div className="w-[1px] h-[28px] bg-ink"></div>
           </div>
         </div>
       </footer>

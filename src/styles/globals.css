@@ -117,3 +117,9 @@ body {
   overflow: hidden;
 }
 
+@media (max-width: 767px) {
+  .hero-portrait-bg {
+    object-position: 62% 25% !important;
+  }
+}
+

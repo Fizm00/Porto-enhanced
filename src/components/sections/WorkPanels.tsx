@@ -146,21 +146,22 @@ export function WorkPanels({ forcedFrame, className = "" }: WorkPanelsProps) {
           <div className="hidden sm:block">{project1.role}</div>
         </div>
 
-        {/* Bottom-Left: Project Title (Overlapping Image in Display Type ~14vw) */}
-        <div className="absolute bottom-6 md:bottom-12 left-5 md:left-12 z-20 max-w-[85vw] pointer-events-none select-none">
-          <h2 className="font-display font-black text-paper text-[clamp(44px,12.5vw,196px)] leading-[0.84] tracking-[-0.03em] uppercase">
-            {project1.title}
-          </h2>
-        </div>
+        {/* Bottom Section: Title & View Project Link (Responsive flex layout prevents text collision on mobile) */}
+        <div className="absolute bottom-6 md:bottom-12 left-5 md:left-12 right-6 md:right-16 z-20 flex flex-col md:flex-row md:items-end justify-between gap-3 md:gap-8 select-none pointer-events-none">
+          <div className="max-w-full md:max-w-[75vw]">
+            <h2 className="font-display font-black text-paper text-[clamp(36px,10vw,196px)] leading-[0.85] tracking-[-0.03em] uppercase">
+              {project1.title}
+            </h2>
+          </div>
 
-        {/* Bottom-Right: "View project" Text Link */}
-        <div className="absolute bottom-6 md:bottom-14 right-8 md:right-16 z-20">
-          <a
-            href={`/work/${project1.slug}`}
-            className="font-mono text-[12px] md:text-[14px] tracking-[0.16em] uppercase text-paper hover:text-signal transition-colors duration-150 inline-block border-b-2 border-paper hover:border-signal pb-0.5 select-none"
-          >
-            VIEW PROJECT
-          </a>
+          <div className="shrink-0 pointer-events-auto self-start md:self-end pb-0.5 md:pb-2">
+            <a
+              href={`/work/${project1.slug}`}
+              className="font-mono text-[12px] md:text-[14px] tracking-[0.16em] uppercase text-paper hover:text-signal transition-colors duration-150 inline-block border-b-2 border-paper hover:border-signal pb-0.5 select-none"
+            >
+              VIEW PROJECT
+            </a>
+          </div>
         </div>
       </div>
 
@@ -216,21 +217,22 @@ export function WorkPanels({ forcedFrame, className = "" }: WorkPanelsProps) {
             <div className="hidden sm:block">{project2.role}</div>
           </div>
 
-          {/* Bottom-Left / Center: Project 2 Title visible in the split area */}
-          <div className="absolute bottom-6 md:bottom-12 left-5 md:left-12 z-20 max-w-[85vw] pointer-events-none select-none">
-            <h2 className="font-display font-black text-paper text-[clamp(44px,12.5vw,196px)] leading-[0.84] tracking-[-0.03em] uppercase">
-              {project2.title}
-            </h2>
-          </div>
+          {/* Bottom Section: Title & View Project Link for Panel 2 (Responsive flex layout prevents text collision on mobile) */}
+          <div className="absolute bottom-6 md:bottom-12 left-5 md:left-12 right-6 md:right-16 z-20 flex flex-col md:flex-row md:items-end justify-between gap-3 md:gap-8 select-none pointer-events-none">
+            <div className="max-w-full md:max-w-[75vw]">
+              <h2 className="font-display font-black text-paper text-[clamp(36px,10vw,196px)] leading-[0.85] tracking-[-0.03em] uppercase">
+                {project2.title}
+              </h2>
+            </div>
 
-          {/* Bottom-Right: "View project" for Panel 2 */}
-          <div className="absolute bottom-6 md:bottom-14 right-8 md:right-16 z-20">
-            <a
-              href={`/work/${project2.slug}`}
-              className="font-mono text-[12px] md:text-[14px] tracking-[0.16em] uppercase text-paper hover:text-signal transition-colors duration-150 inline-block border-b-2 border-paper hover:border-signal pb-0.5 select-none"
-            >
-              VIEW PROJECT
-            </a>
+            <div className="shrink-0 pointer-events-auto self-start md:self-end pb-0.5 md:pb-2">
+              <a
+                href={`/work/${project2.slug}`}
+                className="font-mono text-[12px] md:text-[14px] tracking-[0.16em] uppercase text-paper hover:text-signal transition-colors duration-150 inline-block border-b-2 border-paper hover:border-signal pb-0.5 select-none"
+              >
+                VIEW PROJECT
+              </a>
+            </div>
           </div>
         </div>
       )}
@@ -282,19 +284,22 @@ export function WorkPanels({ forcedFrame, className = "" }: WorkPanelsProps) {
                 <div className="hidden sm:block">{project.role}</div>
               </div>
 
-              <div className="absolute bottom-6 md:bottom-12 left-5 md:left-12 z-20 max-w-[85vw] pointer-events-none select-none">
-                <h2 className="font-display font-black text-paper text-[clamp(44px,12.5vw,196px)] leading-[0.84] tracking-[-0.03em] uppercase">
-                  {project.title}
-                </h2>
-              </div>
+              {/* Bottom Section: Title & View Project Link for Panels 3-5 (Responsive flex layout prevents text collision on mobile) */}
+              <div className="absolute bottom-6 md:bottom-12 left-5 md:left-12 right-6 md:right-16 z-20 flex flex-col md:flex-row md:items-end justify-between gap-3 md:gap-8 select-none pointer-events-none">
+                <div className="max-w-full md:max-w-[75vw]">
+                  <h2 className="font-display font-black text-paper text-[clamp(36px,10vw,196px)] leading-[0.85] tracking-[-0.03em] uppercase">
+                    {project.title}
+                  </h2>
+                </div>
 
-              <div className="absolute bottom-6 md:bottom-14 right-8 md:right-16 z-20">
-                <a
-                  href={`/work/${project.slug}`}
-                  className="font-mono text-[12px] md:text-[14px] tracking-[0.16em] uppercase text-paper hover:text-signal transition-colors duration-150 inline-block border-b-2 border-paper hover:border-signal pb-0.5 select-none"
-                >
-                  VIEW PROJECT
-                </a>
+                <div className="shrink-0 pointer-events-auto self-start md:self-end pb-0.5 md:pb-2">
+                  <a
+                    href={`/work/${project.slug}`}
+                    className="font-mono text-[12px] md:text-[14px] tracking-[0.16em] uppercase text-paper hover:text-signal transition-colors duration-150 inline-block border-b-2 border-paper hover:border-signal pb-0.5 select-none"
+                  >
+                    VIEW PROJECT
+                  </a>
+                </div>
               </div>
             </div>
           );
